@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="label_product_template_view_zpl">
+            <t t-foreach="docs" t-as="product">
+                <t t-translation="off">
+                    ^XA
+                    ^FO330,20^A040,25
+                    ^A0,20,20^FD<t t-esc="product[3]"/> ^FS
+
+
+                    ^FO250,50^BY1
+                    ^A0,20,17^FD<t t-esc="get_product_name(product[0])"/>^FS
+                    ^FO250,60^BY0.5
+
+
+                    <t t-if="get_barcodelot_string(product[0], data)">
+                    ^FO275,80^BY1.400
+                    ^BCN,50,Y,N,N
+                        ^FD<t t-esc="product[4]"/><t t-if="product[1]">/<t t-esc="product[1]"/></t>^FS
+                    </t>
+
+                    ^FO250,160^BY1
+                    ^A0N,20,30^FH^FDPrice:<t t-esc="product[0].list_price" t-options='{"widget": "float", "precision": 3}'/><t t-esc="product[0].company_id.currency_id.symbol"/>^FS
+                    <t t-if="product[2]">
+                     ^FO450,160^BY1
+                     ^A0N,20,30^FH^FDE:<t t-esc="(datetime.datetime.strptime(product[2], '%Y-%m-%d %H:%M:%S')+datetime.timedelta(hours=3)).strftime('%m-%Y')" />^FS
+                    </t>
+                    ^XZ
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
