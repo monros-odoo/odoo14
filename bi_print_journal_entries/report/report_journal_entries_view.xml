@@ -182,7 +182,7 @@
 
                                         <th>
                                             <td style="font-size:14px;height:1px;width:25%;" align="left">
-                                                   <span>..............................</span>
+                                                   <span>.........................</span>
                                             </td>
                                             <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;width:20%;"
                                                 align="left">
@@ -190,15 +190,8 @@
                                             </td>
                                         </th>
                                         <th>
-                                            <td style="font-size:14px;height:1px;width:5%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
                                             <td style="font-size:14px;height:1px;width:35%;" align="left">
-                                                <span>...........................</span>
+                                                <span>.............................</span>
                                             </td>
 
                                         </th>
@@ -209,13 +202,21 @@
                                                 <span/>
                                             </td>
                                         </th>
-                                          <th>
+
+                                        <th>
                                             <td style="font-size:14px;height:1px;width:35%;" align="left">
-                                                <span>...........................</span>
+                                                <span>..........................</span>
                                             </td>
 
                                         </th>
-                                          <th>
+                                        <th>
+                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                                align="left">
+                                                <span/>
+                                            </td>
+                                        </th>
+                                        <th>
                                             <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
                                             <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
                                                 align="left">
@@ -235,7 +236,7 @@
                                                 <span/>
                                             </td>
                                         </th>
-                                         <th>
+                                        <th>
                                             <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
                                             <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
                                                 align="left">
@@ -244,8 +245,8 @@
                                         </th>
 
 
-                                    </tr>
 
+                                    </tr>
                                 </thead>
                             </table>
 
