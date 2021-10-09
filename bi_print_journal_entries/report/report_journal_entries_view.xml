@@ -105,6 +105,46 @@
                       </tr>
                     </tbody>
                 </table>
+                    <br/><br/>
+                    <table style="width:100%;height:50%;align:center;text-align:Center;font-weight:bold;color:#000000;border-width: 1px;border-color: #000000;border-collapse: collapse;">
+
+                                <tr style="font-size:14px;x;font-size:14px;">
+
+                                    <td style="width:40%;font-size:14px;">
+
+                                        <span>Accountants</span>
+                                        <div>.............................</div>
+
+                                    </td>
+
+                                     <td style="width:40%;font-size:14px;">
+
+                                        <span>Financial Manager</span>
+                                        <div>.............................</div>
+
+                                    </td>
+
+
+
+                                    <td style="width:40%;font-size:14px;">
+                                        <span>Reviewer</span><br/>
+                                        <span>.........................</span>
+
+
+                                    </td>
+                                    <br/>
+                                    <br/>
+                                </tr>
+
+
+                                <tr>
+                                    <td style="width:40%"></td>
+                                    <td style="width:40%"></td>
+                                    <td style="width:40%"></td>
+
+                                </tr>
+                            </table>
+
               
                 
                
