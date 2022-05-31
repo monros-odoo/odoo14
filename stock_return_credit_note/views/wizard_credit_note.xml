@@ -13,13 +13,24 @@
                 <button
                         name="create_credit_note"
                         string="Create credit Note"
-                        states="done"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('credit_note', '=', True)]}"
+                        attrs="{'invisible': ['|',('credit_note', '=', True),('state', '!=', 'done')]}"
 
                 />
 
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+
+                <button
+                            type="object"
+                            name="get_credit_view"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('credit_count', '=', 0)]}"
+                            icon="fa-list"
+                        >
+                            <field name="credit_count" widget="statinfo" string="Credit NOtes" />
+                        </button>
             </xpath>
 
         </field>
