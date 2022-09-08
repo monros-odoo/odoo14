@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_stock_report_delivery_document_inherit" inherit_id="stock.report_delivery_document">
+        <xpath expr="/t/t/t/div/table[2]" position="after">
+            
+        <div class="clearfix" name="quantity_total_summary">
+            <div id="total" class="row justify-content-end" name="total">
+                <div class="col-4">
+                    <table class="table table-sm">
+                        <tr class="border-black o_subtotal" >
+                            <td><strong>Total Products</strong></td>
+                            <td><span class="text-right" t-field="o.tot_products"/></td>
+                        </tr>
+                        <tr class="border-black o_subtotal" >
+                            <td><strong>Total Demand</strong></td>
+                            <td><span class="text-right" t-field="o.tot_qty"/></td>
+                        </tr>
+                        <tr class="border-black o_subtotal " >
+                            <td><strong>Total Quantity</strong></td>
+                            <td><span class="text-right" t-field="o.tot_qty_done"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </xpath>
+    </template>
+    
+</odoo>
