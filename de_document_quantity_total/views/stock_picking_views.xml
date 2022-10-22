@@ -1,0 +1,24 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+      <record id="view_picking_form_inherit" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook" position="after">
+                <group>
+                    <group>
+                        <field name="tot_products" />
+                        <field name="tot_qty" />
+                        <field name="tot_qty_done" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+      
+      
+    </data>
+</odoo>

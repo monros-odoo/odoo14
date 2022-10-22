@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+
+<!--           <record id="paperformat_pdf_invoice" model="report.paperformat">-->
+<!--            <field name="name">European A4</field>-->
+<!--            <field name="default" eval="True"/>-->
+<!--            <field name="format">A4</field>-->
+<!--            <field name="page_height">0</field>-->
+<!--            <field name="page_width">0</field>-->
+<!--&lt;!&ndash;            <field name="orientation">Landscape</field>&ndash;&gt;-->
+<!--               <field name="orientation">Portrait</field>-->
+
+<!--            <field name="margin_top">45</field>-->
+<!--            <field name="margin_bottom">33</field>-->
+<!--            <field name="margin_left">15</field>-->
+<!--            <field name="margin_right">7</field>-->
+<!--            <field name="header_line" eval="False"/>-->
+<!--            <field name="header_spacing">39</field>-->
+<!--            <field name="dpi">90</field>-->
+<!--        </record>-->
+        <record id="paperformat_pdf_invoice" model="report.paperformat">
+            <field name="name">European A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+               <field name="orientation">Portrait</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">43</field>
+            <field name="margin_left">14</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">39</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report string="Invoice Report"
+                id="invoice_order_report"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="invoice_report.invoice_customer_report"
+                file="invoice_report.invoice_customer_report"
+
+
+
+        />
+
+
+
+
+        />
+    </data>
+</odoo>

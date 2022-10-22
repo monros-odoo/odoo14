@@ -1,0 +1,141 @@
+<odoo>
+    <data>
+
+        <template id="custom_external_layout_header_invoice">
+            <div class="header">
+                <table style="width:100%;vertical-align:top;font-family:tahoma;">
+                    <tr>
+                        <td style="font-size:14px;font-weight:normal;vertical-align:top" align="left">
+                            <td style="font-size:14px;font-weight:normal;vertical-align:top" align="left">
+                                <span align="right">
+                                    <img
+                                            src="/invoice_report/static/description/img.png"
+                                            style="height:50px; width:100px;vertical-align:top"/>
+                                </span>
+                                <br/>
+                                <strong align="left" style="text-align:left;font-size:15px;">Gazelle Trade S.A.E
+                                </strong>
+                                <br/>
+                                <strong align="left" style="text-align:left;font-size:15px;">Address</strong>
+                                <span t-field="o.company_id.street" style="text-align:center;font-size:15px;"/>
+                                <br/>
+                                <strong align="left" style="text-align:left;font-size:15px;">Zip Code</strong>
+                                <span t-field="o.company_id.zip" style="text-align:center;font-size:14px;"/>
+                                -
+                                <span t-field="o.company_id.state_id.name" style="text-align:center;font-size:14px;"/>
+                                -
+                                <span t-field="o.company_id.city" style="text-align:center;font-size:14px;"/>
+                                <br/>
+                                <strong t-if="o.company_id.phone" align="left" style="text-align:left;font-size:14px;">
+                                    Phone
+                                </strong>
+                                <span t-field="o.company_id.phone" style="text-align:center;font-size:14px;"/>
+                                <br/>
+                                <strong t-if="o.company_id.fax" align="left" style="text-align:left;font-size:14px;">
+                                    Fax
+                                </strong>
+                                <span t-field="o.company_id.fax" style="text-align:center;font-size:14px;"/>
+
+                            </td>
+                        </td>
+
+                        <td style="font-size:26px;font-weight: bold;vertical-align:middle;" align="right">
+                            <strong t-if="o.move_type != 'out_refund' ">
+                               Commercial Invoice
+                            </strong>
+                             <strong t-if="o.move_type == 'out_refund' ">
+                               Credit Note
+                            </strong>
+
+                        </td>
+
+
+                    </tr>
+                </table>
+            </div>
+
+            <p style="border-bottom:1px solid #C0C0C0;"/>
+
+
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+        </template>
+
+        <template id="custom_external_layout_footer_invoice">
+            <div class="footer">
+
+                <p style="border-bottom:1px solid #C0C0C0;"/>
+
+ <p align="center" style="text-align:center;font-weight:bold;font-size:14px;">
+                                * This Original Invoice must have a hard stamp to be certified document
+                            </p>
+                <table style="width:100%;font-family:tahoma;">
+
+
+                    <tr>
+                        <td style="font-size:11px;font-weight:normal;vertical-align:top" align="left">
+                             <td style="font-size:11px;font-weight:normal;vertical-align:top" align="left">
+
+                            <span>Commercial Reg. No. 48035</span>
+                            <br/>
+                            <span>Imports Reg. No. 7001738</span>
+                            <br/>
+                            <span>Sales tax Reg. No. 349-910-243</span>
+
+                             </td>
+                        </td>
+
+                        <td  style="font-size:15px;font-weight:normal;vertical-align:middle;" align="center" >
+                            <span>Page</span>
+                            <span class="page"/>of
+                            <span class="topage"/>
+
+                        </td>
+
+
+
+                        <td style="font-size:10px;font-weight:normal;vertical-align:middle;" align="right">
+                            <img
+                                    src="/invoice_report/static/description/footer1.jpeg"
+                                    style="height:50px; width:80x"/><br/>
+                            <span>Email:</span>  <span t-field="o.company_id.email"/>
+
+                        </td>
+
+
+
+
+                    </tr>
+                </table>
+
+
+            </div>
+        </template>
+
+        <template id="external_layout_invoice">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company">
+                    <t t-set="company" t-value="company"/>
+                </t>
+                <t t-elif="o and 'company' in o">
+                    <t t-set="company" t-value="o.company.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="invoice_report.custom_external_layout_header_invoice">
+                <t t-raw="0"/>
+            </t>
+            <t t-call="invoice_report.custom_external_layout_footer_invoice"/>
+        </template>
+
+    </data>
+</odoo>

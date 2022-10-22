@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='total']//table[1]" position="inside">
+            <tr class="border-black o_total" t-if="o.tot_products">
+                <td name="td_total_qty_label"><strong>Total Products</strong></td>
+                <td class="text-right"><span t-field="o.tot_products"/></td>
+            </tr>
+            <tr class="border-black o_total" t-if="o.tot_qty">
+                <td name="td_total_qty_label"><strong>Total Qty</strong></td>
+                <td class="text-right"><span t-field="o.tot_qty"/></td>
+            </tr>
+        </xpath>
+    </template>
+    
+</odoo>
