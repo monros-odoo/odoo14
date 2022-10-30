@@ -69,7 +69,7 @@
 
                                          <td class="text-right o_price_total">
 <!--                                            <span class="text-nowrap" t-field="line.total_before_discount" />-->
-                                              <span t-esc="'%.2f'%(line.total_before_discount)"/>
+                                              <span t-esc="'%.3f'%(line.total_before_discount)"/>
                                         </td>
 
                                     </t>
@@ -144,7 +144,7 @@
                                         <td><strong>Total Before Discount</strong></td>
                                         <td class="text-right">
 <!--                                            <span t-field="o.total_before_discount"/>-->
-                                              <span t-esc="'%.2f'%(o.total_before_discount)"/>
+                                              <span t-esc="'%.3f'%(o.total_before_discount)"/>
                                         </td>
                                     </tr>
                                     <tr class="border-black o_subtotal" style="">
