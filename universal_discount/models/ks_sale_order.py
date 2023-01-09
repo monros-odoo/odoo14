@@ -19,7 +19,6 @@ class KsGlobalDiscountSales(models.Model):
                                          track_visibility='always')
     ks_enable_discount = fields.Boolean(compute='ks_verify_discount')
 
-    @api.multi
     @api.depends('company_id.ks_enable_discount')
     def ks_verify_discount(self):
         for rec in self:
@@ -27,21 +26,21 @@ class KsGlobalDiscountSales(models.Model):
 
     @api.depends('order_line.price_total', 'ks_global_discount_rate', 'ks_global_discount_type')
     def _amount_all(self):
+        res = super(KsGlobalDiscountSales, self)._amount_all()
         for rec in self:
-            res = super(KsGlobalDiscountSales, rec)._amount_all()
             if not ('ks_global_tax_rate' in rec):
                 rec.ks_calculate_discount()
         return res
 
-    @api.multi
+    # @api.multi
     def _prepare_invoice(self):
+        res = super(KsGlobalDiscountSales, self)._prepare_invoice()
         for rec in self:
-            res = super(KsGlobalDiscountSales, rec)._prepare_invoice()
             res['ks_global_discount_rate'] = rec.ks_global_discount_rate
             res['ks_global_discount_type'] = rec.ks_global_discount_type
         return res
 
-    @api.multi
+    # @api.multi
     def ks_calculate_discount(self):
         for rec in self:
             if rec.ks_global_discount_type == "amount":
@@ -52,6 +51,9 @@ class KsGlobalDiscountSales(models.Model):
                     rec.ks_amount_discount = (rec.amount_untaxed + rec.amount_tax) * rec.ks_global_discount_rate / 100
                 else:
                     rec.ks_amount_discount = 0
+            elif not rec.ks_global_discount_type:
+                rec.ks_amount_discount = 0
+                rec.ks_global_discount_rate = 0
             rec.amount_total = rec.amount_untaxed + rec.amount_tax - rec.ks_amount_discount
 
     @api.constrains('ks_global_discount_rate')
@@ -68,11 +70,9 @@ class KsGlobalDiscountSales(models.Model):
 class KsSaleAdvancePaymentInv(models.TransientModel):
     _inherit = "sale.advance.payment.inv"
 
-    @api.multi
     def _create_invoice(self, order, so_line, amount):
         invoice = super(KsSaleAdvancePaymentInv, self)._create_invoice(order, so_line, amount)
         if invoice:
             invoice['ks_global_discount_rate'] = order.ks_global_discount_rate
             invoice['ks_global_discount_type'] = order.ks_global_discount_type
-
         return invoice
