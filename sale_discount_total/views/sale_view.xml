@@ -14,6 +14,8 @@
                 <xpath expr="//button[@name='action_cancel']" position="attributes">
                     <attribute name="states">draft,sent,sale,waiting</attribute>
                 </xpath>
+
+
                 <xpath expr="//group[@name='note_group']" position="replace">
                     <group name="note_group" col="6">
                         <group name="discount" colspan="2">
@@ -23,7 +25,7 @@
 
                         <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
                             <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                            <field name="amount_discount" widget='monetary'
+                            <field name="amount_discount" widget='monetary' digits="[16, 2]"
                                    options="{'currency_field': 'currency_id'}"/>
                             <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                             <div class="oe_subtotal_footer_separator oe_inline o_td_label">
