@@ -1,0 +1,12 @@
+<odoo>
+    <template id="report_invoice_document_inherit_account" inherit_id="account.report_invoice_document">
+
+        <xpath expr="//div[@id='total']" position="after">
+            <div class="row">
+                        <div class="col-6 text-start">
+                             <span style="font-weight:bold;" t-esc="o.amount_text"/>
+                        </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
