@@ -1,144 +1,144 @@
 <odoo>
     <data>
 
-  <template id="invoice_customer_report">
+        <template id="invoice_customer_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <th t-call="web.external_layout">
                         <t t-set="o" t-value="o.with_context({'lang':'en_US'})"/>
                         <div class="page" border="1">
                             <div class="oe_structure">
-                                  <table border="2">
-                                <tr>
-                                    <th>
-                                        <table  class="gridtable"
-                                               style="width:450px;font-family: verdana,arial,sans-serif;font-size:18px;color:#000000;border-width: 2px;border-color: #000000;border-collapse: collapse;">
-                                            <tr
-                                                style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000; ">
-                                                <th style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000;  ">
-                                                    <strong>From :</strong>
-                                                    <span t-esc="o.get_picking_name()"/>
+                                <table border="2">
+                                    <tr>
+                                        <th>
+                                            <table  class="gridtable"
+                                                    style="width:450px;font-family: verdana,arial,sans-serif;font-size:18px;color:#000000;border-width: 2px;border-color: #000000;border-collapse: collapse;">
+                                                <tr
+                                                        style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000; ">
+                                                    <th style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000;  ">
+                                                        <strong>From :</strong>
+                                                        <span t-esc="o.get_picking_name()"/>
 
 
-                                                </th>
+                                                    </th>
 
-                                            </tr>
-                                            <tr
-                                                style=";border-width: 2px;padding: 10px;border-style: solid;border-color: #000000; ">
-                                                <th style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000;  ">
-                                                    <strong>To:</strong>
-                                                    <span t-field="o.partner_id.name"/>
+                                                </tr>
+                                                <tr
+                                                        style=";border-width: 2px;padding: 10px;border-style: solid;border-color: #000000; ">
+                                                    <th style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000;  ">
+                                                        <strong>To:</strong>
+                                                        <span t-field="o.partner_id.name"/>
 
-                                                </th>
-
-
-
-
-                                            </tr>
+                                                    </th>
 
 
 
-                                        </table>
-                                    </th>
 
-
-                                    <th style="border-color:black,border-style:solid;height:1px;">
-
-                                        <div style="border-color:black,border-style:solid;height:1px;width:5px;"></div>
-
-                                    </th>
-                                     <th>
-                                        <table  class="gridtable"
-                                               style="width:350px;font-family: verdana,text-align:right;arial,sans-serif;font-size:20px;color:#000000;border-width: 1px;border-color: #000000;border-collapse: collapse;">
-                                             <tr
-                                               >
-
-                                                <th >
-
-                                                   <strong style="color:white">dit</strong>
-
-                                                </th>
-                                                  <th  >
-
-                                                      <strong >Transfer</strong>
+                                                </tr>
 
 
 
-                                                </th>
-                                            </tr>
-                                            <tr
-                                               >
-                                                <th  >
-
-                                                      <strong  style="color:white">Tra</strong>
+                                            </table>
+                                        </th>
 
 
+                                        <th style="border-color:black,border-style:solid;height:1px;">
 
-                                                </th>
-                                                <th >
+                                            <div style="border-color:black,border-style:solid;height:1px;width:5px;"></div>
 
-                                                   <strong>Credit</strong>
+                                        </th>
+                                        <th>
+                                            <table  class="gridtable"
+                                                    style="width:350px;font-family: verdana,text-align:right;arial,sans-serif;font-size:20px;color:#000000;border-width: 1px;border-color: #000000;border-collapse: collapse;">
+                                                <tr
+                                                >
 
-                                                </th>
-                                            </tr>
+                                                    <th >
 
+                                                        <strong style="color:white">dit</strong>
 
+                                                    </th>
+                                                    <th  >
 
-                                        </table>
-
-                                    </th>
-
-                                    <th style="border-color:black,border-style:solid;height:1px;">
-
-                                        <div style="border-color:black,border-style:solid;height:1px;width:5px;"></div>
-
-                                    </th>
-                                      <th>
-                                        <table  class="gridtable"
-                                               style="width:400px;font-family: verdana,arial,sans-serif;font-size:18px;color:#000000;border-width: 1px;border-color: #000000;border-collapse: collapse;">
-                                            <tr
-                                                style="border-width: 2px;padding: 10px;border-style: solid;border-color: #000000; ">
-                                                <th style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000">
+                                                        <strong >Transfer</strong>
 
 
-                                                       <span text-align="right">DATE :</span>
-                                                     <span t-field="o.invoice_date" text-align="left"/>
+
+                                                    </th>
+                                                </tr>
+                                                <tr
+                                                >
+                                                    <th  >
+
+                                                        <strong  style="color:white">Tra</strong>
 
 
-                                                </th>
 
-                                            </tr>
-                                            <tr
-                                                style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000; ">
-                                                <th style="border-width: 2px;padding: 10px;border-style: solid;border-color: #000000; ">
+                                                    </th>
+                                                    <th >
+
+                                                        <strong>Credit</strong>
+
+                                                    </th>
+                                                </tr>
 
 
-                                                       <span text-align="right">INVOICE :</span>
+
+                                            </table>
+
+                                        </th>
+
+                                        <th style="border-color:black,border-style:solid;height:1px;">
+
+                                            <div style="border-color:black,border-style:solid;height:1px;width:5px;"></div>
+
+                                        </th>
+                                        <th>
+                                            <table  class="gridtable"
+                                                    style="width:400px;font-family: verdana,arial,sans-serif;font-size:18px;color:#000000;border-width: 1px;border-color: #000000;border-collapse: collapse;">
+                                                <tr
+                                                        style="border-width: 2px;padding: 10px;border-style: solid;border-color: #000000; ">
+                                                    <th style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000">
+
+
+                                                        <span text-align="right">DATE :</span>
+                                                        <span t-field="o.invoice_date" text-align="left"/>
+
+
+                                                    </th>
+
+                                                </tr>
+                                                <tr
+                                                        style="border-width: 1px;padding: 10px;border-style: solid;border-color: #000000; ">
+                                                    <th style="border-width: 2px;padding: 10px;border-style: solid;border-color: #000000; ">
+
+
+                                                        <span text-align="right">INVOICE :</span>
                                                         <span t-field="o.name" text-align="left"/>
 
 
 
-                                                </th>
+                                                    </th>
 
-                                            </tr>
-
-
-
-                                        </table>
-
-                                    </th>
+                                                </tr>
 
 
 
+                                            </table>
+
+                                        </th>
 
 
-                                </tr>
-                            </table>
+
+
+
+                                    </tr>
+                                </table>
                                 <br/>
                                 <div style="border-color:black;font-size:18px">
-                                   <strong>
-                                       Remark:
-                                   </strong>
+                                    <strong>
+                                        Remark:
+                                    </strong>
                                     <span t-field="o.payment_reference"/>
                                 </div>
 
@@ -147,7 +147,7 @@
 
 
                                 <br/>
-                                     <table border="1" style="border-color:black;"  class="table table-sm o_main_table">
+                                <table border="1" style="border-color:black;"  class="table table-sm o_main_table">
                                     <thead align="right" border="1" style="border-color:black; " class="border-black o_subtotal">
                                         <tr border="1" style="border-color:black;font-size:20px" class="border-black o_subtotal">
 
@@ -155,11 +155,11 @@
                                                 <span>SR NO</span>
                                             </th>
 
-                                             <th class="text-center">
-                                                <span>item Code</span>
-                                            </th>
+                                            <!--                                             <th class="text-center">-->
+                                            <!--                                                <span>item Code</span>-->
+                                            <!--                                            </th>-->
 
-                                             <th class="text-center">
+                                            <th class="text-center">
                                                 <span>item Barcode</span>
                                             </th>
                                             <th class="text-center">
@@ -178,10 +178,10 @@
                                             <th  class="text-center">
                                                 <span>Discount % </span>
                                             </th>
-<!--                                            <th  class="text-center">-->
-<!--                                                <span>DISCOUNT KWD</span>-->
-<!--                                            </th>-->
-                                             <th  class="text-center">
+                                            <!--                                            <th  class="text-center">-->
+                                            <!--                                                <span>DISCOUNT KWD</span>-->
+                                            <!--                                            </th>-->
+                                            <th  class="text-center">
                                                 <span>TOTAL PRICE</span>
                                             </th>
 
@@ -193,131 +193,183 @@
                                         <t t-foreach="o.invoice_line_ids" t-as="line">
 
                                             <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
-                                      <t t-if="not line.display_type" name="account_invoice_line_accountable">
-                                                <t t-set="i" t-value="i + 1"/>
+                                                <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                    <t t-set="i" t-value="i + 1"/>
 
-                                                <td  class="text-center">
-                                                    <span t-esc="i"/>
-                                                </td>
+                                                    <td  class="text-center">
+                                                        <span t-esc="i"/>
+                                                    </td>
 
 
-                                                 <td  class="text-center">
-                                                    <span t-field="line.product_id.default_code" style="margin-top:4px;"/>
-                                                </td>
-                                            <td  class="text-center">
+                                                    <!--                                                 <td  class="text-center">-->
+                                                    <!--                                                    <span t-field="line.product_id.default_code" style="margin-top:4px;"/>-->
+                                                    <!--                                                </td>-->
+                                                    <td  class="text-center">
                                                         <span t-field="line.product_id.barcode"/>
                                                     </td>
-                                                 <td  class="text-center">
-                                                    <span t-field="line.name" style="margin-top:4px;"/>
-                                                </td>
+                                                    <td  class="text-center">
+                                                        <span t-field="line.name" style="margin-top:4px;"/>
+                                                    </td>
 
 
-                                                 <td  class="text-center">
-                                                    <span t-field="line.quantity" style="margin-top:4px;"/>
-                                                </td>
+                                                    <td  class="text-center">
+                                                        <span t-field="line.quantity" style="margin-top:4px;"/>
+                                                    </td>
 
-                                                 <td  class="text-center">
-<!--                                                    <span t-field="line.price_unit" style="margin-top:4px;"/>-->
-                                                     <span t-esc="'%.2f'%(line.price_unit)" style="margin-top:4px;"/>
+                                                    <td  class="text-center">
+                                                        <!--                                                    <span t-field="line.price_unit" style="margin-top:4px;"/>-->
+                                                        <span t-esc="'%.2f'%(line.price_unit)" style="margin-top:4px;"/>
 
-                                                </td>
-                                          <td  class="text-center">
-<!--                                                    <span t-field="line.price_unit" style="margin-top:4px;"/>-->
-                                                     <span t-esc="'%.2f'%(line.discount)" style="margin-top:4px;"/>
+                                                    </td>
+                                                    <td  class="text-center">
+                                                        <!--                                                    <span t-field="line.price_unit" style="margin-top:4px;"/>-->
+                                                        <span t-esc="'%.2f'%(line.discount)" style="margin-top:4px;"/>
 
-                                                </td>
-<!--                                          <td  class="text-center">-->
-<!--&lt;!&ndash;                                                    <span t-field="line.price_unit" style="margin-top:4px;"/>&ndash;&gt;-->
-<!--                                                     <span t-esc="'%.2f'%(line.discount)" style="margin-top:4px;"/>-->
+                                                    </td>
+                                                    <!--                                          <td  class="text-center">-->
+                                                    <!--&lt;!&ndash;                                                    <span t-field="line.price_unit" style="margin-top:4px;"/>&ndash;&gt;-->
+                                                    <!--                                                     <span t-esc="'%.2f'%(line.discount)" style="margin-top:4px;"/>-->
 
-<!--                                                </td>-->
+                                                    <!--                                                </td>-->
 
-                                                  <td  class="text-center">
-<!--                                                    <span t-field="line.price_subtotal"/>-->
-                                                       <span t-esc="'%.2f'%(line.price_subtotal)" style="margin-top:4px;"/>
-                                                </td>
+                                                    <td  class="text-center">
+                                                        <!--                                                    <span t-field="line.price_subtotal"/>-->
+                                                        <span t-esc="'%.2f'%(line.price_subtotal)" style="margin-top:4px;"/>
+                                                    </td>
 
 
 
-</t>
+                                                </t>
                                             </tr>
 
-                                             <t t-if="line.display_type == 'line_section'">
-                                        <td colspan="99">
-                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                        </td>
-                                        <t t-set="current_section" t-value="line"/>
-                                        <t t-set="current_subtotal" t-value="0"/>
-                                    </t>
-                                    <t t-if="line.display_type == 'line_note'">
-                                        <td colspan="99">
-                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                        </td>
-                                    </t>
+                                            <t t-if="line.display_type == 'line_section'">
+                                                <td colspan="99">
+                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                </td>
+                                                <t t-set="current_section" t-value="line"/>
+                                                <t t-set="current_subtotal" t-value="0"/>
+                                            </t>
+                                            <t t-if="line.display_type == 'line_note'">
+                                                <td colspan="99">
+                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                </td>
+                                            </t>
                                         </t>
                                     </tbody>
                                 </table>
                                 <p style="border-bottom:1px solid #000000"/>
 
-                </div><br/>
+                            </div><br/>
                             <div class="clearfix">
-                        <div id="total" class="row"  >
-                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-5 col-md-4'} ml-auto">
-                                <table class="table table-sm" style="page-break-inside: avoid;font-size:20px">
-                                    <tr class="border-black o_subtotal" style="">
-                                        <td><strong>Total Price</strong></td>
-                                        <td class="text-right">
-                                            <span t-field="o.amount_untaxed"/>
-                                        </td>
-                                    </tr>
-                                    <t t-foreach="o.amount_by_group" t-as="amount_by_group">
-                                        <tr style="">
-                                            <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
-                                                <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
-                                                <td class="text-right o_price_total">
-                                                    <span class="text-nowrap" t-esc="amount_by_group[3]" />
-                                                </td>
-                                            </t>
-                                            <t t-else="">
-                                                <td>
-                                                    <span t-esc="amount_by_group[0]"/>
-<!--                                                    <span class="text-nowrap"> on-->
-<!--                                                        <t t-esc="amount_by_group[4]"/>-->
-<!--                                                    </span>-->
-                                                </td>
-                                                <td class="text-right o_price_total">
-                                                    <span class="text-nowrap" t-esc="amount_by_group[3]"/>
-                                                </td>
-                                            </t>
-                                        </tr>
-                                    </t>
-                                      <tr class="border-black o_total">
-                                        <td><strong>Discount</strong></td>
-                                        <td class="text-right">
-                                            <span class="text-nowrap" t-field="o.amount_discount"/>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-black o_total">
-                                        <td><strong>KWD NET TOTAL</strong></td>
-                                        <td class="text-right">
-                                            <span class="text-nowrap" t-field="o.amount_total"/>
-                                        </td>
-                                    </tr>
+                                <div id="total" class="row"  >
+                                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-5 col-md-4'} ml-auto">
+                                        <t t-if="o.invoice_line_ids and o.invoice_line_ids[-1].price_unit&lt;0">
+                                            <table class="table table-sm" style="page-break-inside: avoid;font-size:20px">
+                                                <tr class="border-black o_subtotal" style="">
+                                                    <td><strong>Total Before Discount</strong></td>
+                                                    <td class="text-right">
+                                                        <span t-esc="'%.3f'%(o.total_before_discount-o.invoice_line_ids[-1].price_subtotal)"/>
+                                                        <!--                                            <span t-field="o.amount_untaxed"/>-->
+                                                    </td>
+                                                </tr>
+                                                <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                                    <tr style="">
+                                                        <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
+                                                            <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
+                                                            <td class="text-right o_price_total">
+                                                                <span class="text-nowrap" t-esc="amount_by_group[3]" />
+                                                            </td>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <td>
+                                                                <span t-esc="amount_by_group[0]"/>
+                                                                <!--                                                    <span class="text-nowrap"> on-->
+                                                                <!--                                                        <t t-esc="amount_by_group[4]"/>-->
+                                                                <!--                                                    </span>-->
+                                                            </td>
+                                                            <td class="text-right o_price_total">
+                                                                <span class="text-nowrap" t-esc="amount_by_group[3]"/>
+                                                            </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+                                                <tr class="border-black o_total">
+                                                    <td><strong>Discount</strong></td>
+                                                    <td class="text-right">
+                                                        <span class="text-nowrap" t-esc="'%.3f'%(-o.invoice_line_ids[-1].price_subtotal)"/>
 
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                                        <!--                                                    <span class="text-nowrap" t-field="o.amount_discount"/>-->
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-black o_total">
+                                                    <td><strong>KWD NET TOTAL</strong></td>
+                                                    <td class="text-right">
+                                                        <span class="text-nowrap" t-field="o.amount_total"/>
+                                                    </td>
+                                                </tr>
 
-            </div><br/>
+                                            </table>
+                                        </t>
+                                        <t t-if="o.invoice_line_ids and o.invoice_line_ids[-1].price_unit&gt;0">
+                                            <table class="table table-sm" style="page-break-inside: avoid;font-size:20px">
+<!--                                                <tr class="border-black o_subtotal" style="">-->
+<!--                                                    <td><strong>Total Before Discount</strong></td>-->
+<!--                                                    <td class="text-right">-->
+<!--                                                        <span t-esc="'%.3f'%(o.total_before_discount-o.invoice_line_ids[-1].price_subtotal)"/>-->
+<!--                                                        &lt;!&ndash;                                            <span t-field="o.amount_untaxed"/>&ndash;&gt;-->
+<!--                                                    </td>-->
+<!--                                                </tr>-->
+                                                <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                                    <tr style="">
+                                                        <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
+                                                            <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
+                                                            <td class="text-right o_price_total">
+                                                                <span class="text-nowrap" t-esc="amount_by_group[3]" />
+                                                            </td>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <td>
+                                                                <span t-esc="amount_by_group[0]"/>
+                                                                <!--                                                    <span class="text-nowrap"> on-->
+                                                                <!--                                                        <t t-esc="amount_by_group[4]"/>-->
+                                                                <!--                                                    </span>-->
+                                                            </td>
+                                                            <td class="text-right o_price_total">
+                                                                <span class="text-nowrap" t-esc="amount_by_group[3]"/>
+                                                            </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+<!--                                                <tr class="border-black o_total">-->
+<!--                                                    <td><strong>Discount</strong></td>-->
+<!--                                                    <td class="text-right">-->
+<!--                                                        <span class="text-nowrap" t-esc="'%.3f'%(-o.invoice_line_ids[-1].price_subtotal)"/>-->
 
-                         <br/>
-                                <div style="border-color:black;font-size:18px">
-                                   <strong>
-                                     Notes:
-                                   </strong>
-                                    <strong t-field="o.narration"/>
+<!--                                                        &lt;!&ndash;                                                    <span class="text-nowrap" t-field="o.amount_discount"/>&ndash;&gt;-->
+<!--                                                    </td>-->
+<!--                                                </tr>-->
+                                                <tr class="border-black o_total">
+                                                    <td><strong>KWD NET TOTAL</strong></td>
+                                                    <td class="text-right">
+                                                        <span class="text-nowrap" t-field="o.amount_total"/>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </t>
+                                    </div>
                                 </div>
+                            </div>
+
+                        </div><br/>
+
+                        <br/>
+                        <div style="border-color:black;font-size:18px">
+                            <strong>
+                                Notes:
+                            </strong>
+                            <strong t-field="o.narration"/>
+                        </div>
 
 
 
@@ -326,98 +378,98 @@
 
 
 
-        <br/>
-                                 <table style="width:100%;hieght:100px;font-size:16px;font-size:16px;font-weight:bold;">
-                                <thead style="font-family:'Times New Roman';">
+                        <br/>
+                        <table style="width:100%;hieght:100px;font-size:16px;font-size:16px;font-weight:bold;">
+                            <thead style="font-family:'Times New Roman';">
 
 
-                                     <tr>
+                                <tr>
 
-                                        <th>
-                                            <td style="font-size:16px;height:1px;width:25%" align="left">
-                                                <span>________________________________</span>
-                                            </td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;width:15%;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:18px;height:1px;width:5%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-<!--                                            <td style="font-size:16px;height:1px;width:25%;" align="left">-->
-<!--                                                <span>Audited By :</span>-->
-<!--                                            </td>-->
+                                    <th>
+                                        <td style="font-size:16px;height:1px;width:25%" align="left">
+                                            <span>________________________________</span>
+                                        </td>
+                                        <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;width:15%;"
+                                            align="left">
+                                            <span/>
+                                        </td>
+                                    </th>
+                                    <th>
+                                        <td style="font-size:18px;height:1px;width:5%;" align="left"></td>
+                                        <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
+                                            align="left">
+                                            <span/>
+                                        </td>
+                                    </th>
+                                    <th>
+                                        <!--                                            <td style="font-size:16px;height:1px;width:25%;" align="left">-->
+                                        <!--                                                <span>Audited By :</span>-->
+                                        <!--                                            </td>-->
 
-                                        </th>
-                                        <th>
-                                            <td style="font-size:18px;height:1px;width:5%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:16px;height:1px;width:25%;" align="left">
-                                                <span>__________________________________</span>
-                                            </td>
+                                    </th>
+                                    <th>
+                                        <td style="font-size:18px;height:1px;width:5%;" align="left"></td>
+                                        <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
+                                            align="left">
+                                            <span/>
+                                        </td>
+                                    </th>
+                                    <th>
+                                        <td style="font-size:16px;height:1px;width:25%;" align="left">
+                                            <span>__________________________________</span>
+                                        </td>
 
-                                        </th>
-
-
-                                    </tr>
-                                      <tr>
-
-                                        <th>
-                                            <td style="font-size:20px;height:1px;width:25%" align="left">
-                                                <strong>Prepared By:</strong>
-                                            </td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;width:15%;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:18px;height:1px;width:5%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-<!--                                            <td style="font-size:16px;height:1px;width:25%;" align="left">-->
-<!--                                                <span>Audited By :</span>-->
-<!--                                            </td>-->
-
-                                        </th>
-                                        <th>
-                                            <td style="font-size:20px;height:1px;width:5%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:20px;height:1px;width:25%;" align="left">
-                                                <strong>Received by :</strong>
-                                            </td>
-
-                                        </th>
+                                    </th>
 
 
-                                    </tr>
-                                </thead>
-                            </table>
+                                </tr>
+                                <tr>
+
+                                    <th>
+                                        <td style="font-size:20px;height:1px;width:25%" align="left">
+                                            <strong>Prepared By:</strong>
+                                        </td>
+                                        <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;width:15%;"
+                                            align="left">
+                                            <span/>
+                                        </td>
+                                    </th>
+                                    <th>
+                                        <td style="font-size:18px;height:1px;width:5%;" align="left"></td>
+                                        <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
+                                            align="left">
+                                            <span/>
+                                        </td>
+                                    </th>
+                                    <th>
+                                        <!--                                            <td style="font-size:16px;height:1px;width:25%;" align="left">-->
+                                        <!--                                                <span>Audited By :</span>-->
+                                        <!--                                            </td>-->
+
+                                    </th>
+                                    <th>
+                                        <td style="font-size:20px;height:1px;width:5%;" align="left"></td>
+                                        <td style="height:1px;color:#2a2a2a;font-size:19px;font-weight:bold;"
+                                            align="left">
+                                            <span/>
+                                        </td>
+                                    </th>
+                                    <th>
+                                        <td style="font-size:20px;height:1px;width:25%;" align="left">
+                                            <strong>Received by :</strong>
+                                        </td>
+
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
 
 
 
 
-                          </th></t></t></template>
+                    </th></t></t></template>
 
     </data>
 </odoo>
