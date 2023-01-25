@@ -1,268 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-	<data>
+    <data>
 
-		<template id="journal_entry_template_report_view">
-			<t t-call="web.external_layout">
+        <template id="journal_entry_template_report_view">
+            <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
                 <div class="page">
                     <br/><br/>
                     <div class="oe_structure"/>
-                        <div>
-                            <h3 class="text-center mb32">
-                                <strong>Journal Entry</strong>
-                            </h3>
-                        </div>
+                    <div>
+                        <h3 class="text-center mb32">
+                            <strong>Journal Entry</strong>
+                        </h3>
+                    </div>
                     <br/>
-
-                <div class="row" id="journal_information">
-                    <div class="col-8">
-                        <div>
-                            <strong>Journal Entry :</strong>
-                            <p t-field="o.name"/>
+                    <div class="row" id="journal_information">
+                        <div class="col-8">
+                            <div>
+                                <strong>Journal Entry :</strong>
+                                <p t-field="o.name"/>
+                            </div>
+                            <div class="text-left">
+                                <strong>Date :</strong>
+                                <p t-field="o.date"/>
+                            </div>
                         </div>
-
-                        <div class="text-left">
-                            <strong>Date :</strong>
-                            <p t-field="o.date"/>
+                        <div class="col-8">
+                            <div>
+                                <strong>Journal :</strong>
+                                <p t-field="o.journal_id"/>
+                            </div>
+                            <div class="text-left">
+                                <strong>Reference :</strong>
+                                <p t-field="o.ref"/>
+                            </div>
                         </div>
-                    </div>  
-               
-                    <div class="col-8">
-                        <div>
-                            <strong>Journal :</strong>
-                            <p t-field="o.journal_id"/>
-                        </div>
-                        <div class="text-left">
-                            <strong>Reference :</strong>
-                            <p t-field="o.ref"/>
-                        </div>
-                    </div>  
-                </div>
-               
-
-               <br/><br/>
-                <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Partner</th>
-                            <th>Account</th>
-                            <th>Label</th>
-                            <th>Due Date</th>
-                            <th>Analytic Account</th>
-                            <th>Taxes(%)</th>
-                            <th>Debit</th>
-                            <th>Credit</th>
-                        </tr>
-                    </thead>  
-                    <tbody class="consumed_tbody">
-                        <t t-set="total" t-value="0.0"/>
-                        <t t-set="total1" t-value="0.0"/>
-                        <t t-foreach="o.line_ids" t-as="line">    
-                        <tr>
-                            <td>
-                                <span t-field="line.partner_id" />
-                            </td>
-                            <td>
-                                <span t-field="line.account_id" />
-                            </td>
-                            <td>
-                                <span t-field="line.name" />
-                            </td>
-                            <td>
-                                <span t-field="line.date_maturity" />
-                            </td>
-                            <td>
-                                <span t-field="line.analytic_account_id" />
-                            </td>
-                            <td>
-                                <span t-field="line.tax_ids" />
-                            </td>
-                            <td>
-                                <span t-field="line.debit" />
-                            </td>
-                            <td>
-                                <span t-field="line.credit" />
-                            </td>
-                        </tr>
-                        <t t-set="total" t-value="total + line.debit"/>
-                        <t t-set="total1" t-value="total1 + line.credit"/>
-                        </t>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total:</strong></td>
-                            <td width="10%"><strong>
-                                <span><t t-esc="total"/></span>
-                            </strong></td>
-                             <td width="10%"><strong>
-                                <span><t t-esc="total1"/></span>
-                            </strong></td>
-                      </tr>
-                    </tbody>
-                </table>
+                    </div>
+                    <br/><br/>
+                    <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Partner</th>
+                                <th>Account</th>
+                                <th>Label</th>
+                                <th>Due Date</th>
+                                <th>Analytic Account</th>
+                                <th>Taxes(%)</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="consumed_tbody">
+                            <t t-set="total" t-value="0.0"/>
+                            <t t-set="total1" t-value="0.0"/>
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td>
+                                        <span t-field="line.partner_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.account_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.date_maturity" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.analytic_account_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.tax_ids" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.debit" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.credit" />
+                                    </td>
+                                </tr>
+                                <t t-set="total" t-value="total + line.debit"/>
+                                <t t-set="total1" t-value="total1 + line.credit"/>
+                            </t>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total:</strong></td>
+                                <td width="10%"><strong>
+                                    <span><t t-esc="total"/></span>
+                                </strong></td>
+                                <td width="10%"><strong>
+                                    <span><t t-esc="total1"/></span>
+                                </strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <br/><br/>
                     <table style="width:100%;hieght:100px;font-size:14px;font-size:14px;font-weight:bold;">
-                                <thead style="font-family:'Times New Roman';">
+                        <thead style="font-family:'Times New Roman';">
+                            <tr>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:25%;" align="left">
+                                        <span>Accountants</span>
+                                    </td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;width:20%;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:35%;" align="left">
+                                        <span>Financial Manager</span>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:35%;" align="left">
+                                        <span>Reviewer</span>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th> <th>
+                                <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                    align="left">
+                                    <span/>
+                                </td>
+                            </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:25%;" align="left">
+                                        <span>.........................</span>
+                                    </td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;width:20%;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:35%;" align="left">
+                                        <span>.............................</span>
+                                    </td>
 
-                                    <tr>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
 
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:25%;" align="left">
-                                                   <span>Accountants</span>
-                                            </td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;width:20%;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:35%;" align="left">
-                                                <span>Financial Manager</span>
-                                            </td>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:35%;" align="left">
+                                        <span>..........................</span>
+                                    </td>
 
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:35%;" align="left">
-                                                <span>Reviewer</span>
-                                            </td>
-
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                          <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th> <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-
-
-
-                                    </tr>
-                                     <tr>
-
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:25%;" align="left">
-                                                   <span>.........................</span>
-                                            </td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;width:20%;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:35%;" align="left">
-                                                <span>.............................</span>
-                                            </td>
-
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:35%;" align="left">
-                                                <span>..........................</span>
-                                            </td>
-
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                          <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th> <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-                                        <th>
-                                            <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
-                                            <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
-                                                align="left">
-                                                <span/>
-                                            </td>
-                                        </th>
-
-
-
-                                    </tr>
-                                </thead>
-                            </table>
-
-                
-               
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th> <th>
+                                <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                    align="left">
+                                    <span/>
+                                </td>
+                            </th>
+                                <th>
+                                    <td style="font-size:14px;height:1px;width:20%;" align="left"></td>
+                                    <td style="height:1px;color:#2a2a2a;font-size:15px;font-weight:bold;"
+                                        align="left">
+                                        <span/>
+                                    </td>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div t-attf-class="o_company_#{o.company_id.id}_layout footer o_background_footer">
+                    <div class="text-center">
+                        <ul class="list-inline">
+                            <li t-if="o.company_id.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span class="o_force_ltr" t-field="o.company_id.phone"/></li>
+                            <li t-if="o.company_id.email" class="list-inline-item"><i class="fa fa-at" role="img" aria-label="Email" title="Email"/> <span t-field="o.company_id.email"/></li>
+                            <li t-if="o.company_id.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="o.company_id.website"/></li>
+                            <li t-if="o.company_id.vat" class="list-inline-item"><i class="fa fa-building-o" role="img" aria-label="Fiscal number"/><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.company_id.vat"/></li>
+                        </ul>
+                        <!--                    <div t-field="company.report_footer"/>-->
+                        <div t-if="report_type == 'pdf'" class="text-muted">
+                            Page:
+                            <span class="page"/>
+                            of
+                            <span class="topage"/>
+                        </div>
+                    </div>
                 </div>
             </t>
-		</template>
-
-		<template id="journal_entry_report_template_id">
-			<t t-call="web.html_container">
-				<t t-foreach="docs" t-as="o">
-					<t t-call="bi_print_journal_entries.journal_entry_template_report_view"  t-lang="o.partner_id.lang"/>
-				</t>
-			</t>
-		</template>
-
-	</data>
+        </template>
+        <template id="journal_entry_report_template_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="bi_print_journal_entries.journal_entry_template_report_view"  t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
 </odoo>
