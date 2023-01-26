@@ -152,6 +152,22 @@
                                 </td>
                             </tr>
                         </t>
+                        <t t-if="o.invoice_line_ids and o.invoice_line_ids[-1].price_unit&gt;0">
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total Before Discount</strong></td>
+                                <td class="text-right">
+                                    <!--                                            <span t-field="o.total_before_discount"/>-->
+                                    <span t-esc="'%.3f'%(o.total_before_discount)"/>
+                                </td>
+                            </tr>
+
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Discount</strong></td>
+                                <td class="text-right">
+                                    <span>0</span>
+                                </td>
+                            </tr>
+                        </t>
                         <t t-foreach="o.amount_by_group" t-as="amount_by_group">
                             <tr style="">
                                 <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
