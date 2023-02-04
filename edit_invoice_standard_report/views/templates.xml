@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th name="th_description" class="text-left"><span>SR NO.</span></th>
-<!--                        <th name="th_description" class="text-left"><span>Item Code</span></th>-->
+                        <!--                        <th name="th_description" class="text-left"><span>Item Code</span></th>-->
                         <th name="th_description" class="text-left"><span>Description</span></th>
                         <th name="th_description" class="text-left"><span>Barcode</span></th>
                         <th name="th_quantity" class="text-right"><span>Quantity</span></th>
@@ -48,9 +48,9 @@
                                 <td  class="text-center">
                                     <span t-esc="item"/>
                                 </td>
-<!--                                <td  class="text-center">-->
-<!--                                    <span t-field="line.product_id.default_code" style="margin-top:4px;"/>-->
-<!--                                </td>-->
+                                <!--                                <td  class="text-center">-->
+                                <!--                                    <span t-field="line.product_id.default_code" style="margin-top:4px;"/>-->
+                                <!--                                </td>-->
                                 <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                 <td  class="text-center">
                                     <span t-field="line.product_id.barcode"/>
@@ -136,19 +136,54 @@
             <div id="total" class="row">
                 <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
                     <table class="table table-sm" style="page-break-inside: avoid;">
-                        <tr class="border-black o_subtotal" style="">
-                            <td><strong>Total Before Discount</strong></td>
-                            <td class="text-right">
-                                <!--                                            <span t-field="o.total_before_discount"/>-->
-                                <span t-esc="'%.3f'%(o.total_before_discount-o.invoice_line_ids[-1].price_subtotal)"/>
-                            </td>
-                        </tr>
-                        <tr class="border-black o_subtotal" style="">
-                            <td><strong>Discount</strong></td>
-                            <td class="text-right">
-                                <span t-esc="'%.3f'%(-o.invoice_line_ids[-1].price_subtotal)"/>
-                            </td>
-                        </tr>
+                        <t t-if="o.invoice_line_ids and o.invoice_line_ids[-1].price_unit&lt;0">
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total Before Discount</strong></td>
+                                <td class="text-right">
+                                    <!--                                            <span t-field="o.total_before_discount"/>-->
+                                  <span t-field="o.currency_id.symbol"/>  <span t-esc="'%.3f'%(o.total_before_discount-o.invoice_line_ids[-1].price_subtotal)"/>
+                                </td>
+                            </tr>
+
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Discount</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"/><span t-esc="'%.3f'%(-o.invoice_line_ids[-1].price_subtotal)"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="o.invoice_line_ids and o.invoice_line_ids[-1].price_unit&gt;0">
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total Before Discount</strong></td>
+                                <td class="text-right">
+                                    <!--                                            <span t-field="o.total_before_discount"/>-->
+                                    <span t-field="o.currency_id.symbol"/><span t-esc="'%.3f'%(o.total_before_discount)"/>
+                                </td>
+                            </tr>
+
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Discount</strong></td>
+                                <td class="text-right">
+                                 <span></span><span t-field="o.currency_id.symbol"/>   <span>0</span>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="o.invoice_line_ids and o.invoice_line_ids[-1].price_unit==0">
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total Before Discount</strong></td>
+                                <td class="text-right">
+                                    <!--                                            <span t-field="o.total_before_discount"/>-->
+                                 <span></span><span t-field="o.currency_id.symbol"/>   <span t-esc="'%.3f'%(o.total_before_discount)"/>
+                                </td>
+                            </tr>
+
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Discount</strong></td>
+                                <td class="text-right">
+                                   <span t-field="o.currency_id.symbol"/> <span>0</span>
+                                </td>
+                            </tr>
+                        </t>
                         <t t-foreach="o.amount_by_group" t-as="amount_by_group">
                             <tr style="">
                                 <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
