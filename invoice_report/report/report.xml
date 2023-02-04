@@ -34,16 +34,16 @@
             <field name="dpi">90</field>
         </record>
 
-        <report string="Invoice Report"
-                id="invoice_order_report"
-                model="account.move"
-                report_type="qweb-pdf"
-                name="invoice_report.invoice_customer_report"
-                file="invoice_report.invoice_customer_report"
+<!--        <report string="Invoice Report"-->
+<!--                id="invoice_order_report"-->
+<!--                model="account.move"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="invoice_report.invoice_customer_report"-->
+<!--                file="invoice_report.invoice_customer_report"-->
 
 
 
-        />
+<!--        />-->
 
 
 

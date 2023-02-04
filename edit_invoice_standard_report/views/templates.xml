@@ -141,14 +141,20 @@
                                 <td><strong>Total Before Discount</strong></td>
                                 <td class="text-right">
                                     <!--                                            <span t-field="o.total_before_discount"/>-->
-                                    <span t-esc="'%.3f'%(o.total_before_discount-o.invoice_line_ids[-1].price_subtotal)"/>
+                                  <span t-field="o.currency_id.symbol"/>  <span t-esc="'%.3f'%(o.total_before_discount-o.invoice_line_ids[-1].price_subtotal)"/>
                                 </td>
                             </tr>
 
                             <tr class="border-black o_subtotal" style="">
                                 <td><strong>Discount</strong></td>
                                 <td class="text-right">
-                                    <span t-esc="'%.3f'%(-o.invoice_line_ids[-1].price_subtotal)"/>
+                                    <span t-field="o.currency_id.symbol"/><span t-esc="'%.3f'%(-o.invoice_line_ids[-1].price_subtotal)"/>
+                                </td>
+                            </tr>
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                  <span t-field="o.currency_id.symbol"/>  <span t-esc="'%.3f'%(o.total_before_discount)"/>
                                 </td>
                             </tr>
                         </t>
@@ -157,14 +163,20 @@
                                 <td><strong>Total Before Discount</strong></td>
                                 <td class="text-right">
                                     <!--                                            <span t-field="o.total_before_discount"/>-->
-                                    <span t-esc="'%.3f'%(o.total_before_discount)"/>
+                                    <span t-field="o.currency_id.symbol"/><span t-esc="'%.3f'%(o.total_before_discount)"/>
                                 </td>
                             </tr>
 
                             <tr class="border-black o_subtotal" style="">
                                 <td><strong>Discount</strong></td>
                                 <td class="text-right">
-                                    <span>0</span>
+                                 <span></span><span t-field="o.currency_id.symbol"/>   <span>0</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                  <span t-field="o.currency_id.symbol"/>  <span t-esc="'%.3f'%(o.total_before_discount)"/>
                                 </td>
                             </tr>
                         </t>
@@ -173,14 +185,20 @@
                                 <td><strong>Total Before Discount</strong></td>
                                 <td class="text-right">
                                     <!--                                            <span t-field="o.total_before_discount"/>-->
-                                    <span t-esc="'%.3f'%(o.total_before_discount)"/>
+                                 <span></span><span t-field="o.currency_id.symbol"/>   <span t-esc="'%.3f'%(o.total_before_discount)"/>
                                 </td>
                             </tr>
 
                             <tr class="border-black o_subtotal" style="">
                                 <td><strong>Discount</strong></td>
                                 <td class="text-right">
-                                    <span>0</span>
+                                   <span t-field="o.currency_id.symbol"/> <span>0</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                  <span t-field="o.currency_id.symbol"/>  <span t-esc="'%.3f'%(o.total_before_discount)"/>
                                 </td>
                             </tr>
                         </t>
@@ -205,12 +223,12 @@
                                 </t>
                             </tr>
                         </t>
-                        <tr class="border-black o_total">
-                            <td><strong>Total</strong></td>
-                            <td class="text-right">
-                                <span class="text-nowrap" t-field="o.amount_total"/>
-                            </td>
-                        </tr>
+<!--                        <tr class="border-black o_total">-->
+<!--                            <td><strong>Total</strong></td>-->
+<!--                            <td class="text-right">-->
+<!--                                <span class="text-nowrap" t-field="o.amount_total"/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         <t t-if="print_with_payments">
                             <t t-if="o.payment_state != 'invoicing_legacy'">
                                 <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
