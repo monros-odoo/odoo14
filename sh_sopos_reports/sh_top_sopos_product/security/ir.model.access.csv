@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sh_sopos_selling_product_public,access_sh_sopos_selling_product_public,model_sh_sopos_selling_product,,1,1,1,1
+access_top_selling_sopos_excel_extended,access_top_selling_sopos_excel_extended,model_top_selling_sopos_excel_extended,,1,1,1,1
+access_sh_sopos_selling_product_wizard,access_sh_sopos_selling_product_wizard,model_sh_sopos_selling_product_wizard,base.group_user,1,1,1,1

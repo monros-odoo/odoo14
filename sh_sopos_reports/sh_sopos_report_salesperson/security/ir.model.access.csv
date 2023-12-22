@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sh_sopos_report_salesperson_xls,access_sopos_report_salesperson_xls,model_sopos_report_salesperson_xls,base.group_erp_manager,1,1,1,1
+access_sopos_report_salesperson_xls_user,access_sopos_report_salesperson_xls_user,model_sopos_report_salesperson_xls,,1,1,1,1
+access_sh_sopos_report_sp_wizard,access_sh_sopos_report_sp_wizard,model_sh_sopos_report_sp_wizard,base.group_user,1,1,1,1

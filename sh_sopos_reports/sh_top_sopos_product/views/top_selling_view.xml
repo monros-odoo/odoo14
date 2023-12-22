@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_sopos_selling_product_model_tree" model="ir.ui.view">
+        <field name="name">sh.sopos.selling.product.model.tree</field>
+        <field name="model">sh.sopos.selling.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id" />
+                <field name="qty" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sh_sopos_selling_product_model_tree_action" model="ir.actions.act_window">
+        <field name="name">Top SO and POS Selling Products</field>
+        <field name="res_model">sh.sopos.selling.product</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="sh_sopos_selling_product_model_tree" />
+    </record>
+
+    <menuitem id="sh_sopos_selling_products_main" action="sh_sopos_selling_product_model_tree_action" parent="sale.menu_sale_report" sequence="5" />
+
+    <menuitem id="sh_sopos_top_selling_products" name="Top SO and POS Selling Products" parent="sh_sopos_selling_products_main" action="sh_sopos_selling_product_model_tree_action" />
+
+    <menuitem id="sh_sopos_update_top_selling_products" name="Update SO and POS Top Selling Products" parent="sh_sopos_selling_products_main" action="sh_sopos_selling_product_wizard_action" />
+
+    <menuitem id="sh_sopos_selling_products_main_pos" action="sh_sopos_selling_product_model_tree_action" parent="point_of_sale.menu_point_rep" sequence="5" />
+
+    <menuitem id="sh_sopos_top_selling_products_pos" name="Top SO and POS Selling Products" parent="sh_sopos_selling_products_main_pos" action="sh_sopos_selling_product_model_tree_action" />
+
+    <menuitem id="sh_sopos_update_top_selling_products_pos" name="Update SO and POS Top Selling Products" parent="sh_sopos_selling_products_main_pos" action="sh_sopos_selling_product_wizard_action" />
+</odoo>
