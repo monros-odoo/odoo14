@@ -41,12 +41,13 @@
                     <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
                         <thead>
                             <tr>
-                                <th>Partner</th>
+                                <th>Sl.No</th>
+                                <th>Customer/Supplier</th>
                                 <th>Account</th>
                                 <th>Label</th>
-                                <th>Due Date</th>
-                                <th>Analytic Account</th>
-                                <th>Taxes(%)</th>
+<!--                                <th>Due Date</th>-->
+<!--                                <th>Analytic Account</th>-->
+<!--                                <th>Taxes(%)</th>-->
                                 <th>Debit</th>
                                 <th>Credit</th>
                             </tr>
@@ -54,8 +55,13 @@
                         <tbody class="consumed_tbody">
                             <t t-set="total" t-value="0.0"/>
                             <t t-set="total1" t-value="0.0"/>
+                            <t t-set="sl_no" t-value="0"/>
                             <t t-foreach="o.line_ids" t-as="line">
                                 <tr>
+                                    <td>
+                                        <t t-set="sl_no" t-value="sl_no + 1"/>
+                                        <span t-esc="sl_no" />
+                                    </td>
                                     <td>
                                         <span t-field="line.partner_id" />
                                     </td>
@@ -65,15 +71,15 @@
                                     <td>
                                         <span t-field="line.name" />
                                     </td>
-                                    <td>
-                                        <span t-field="line.date_maturity" />
-                                    </td>
-                                    <td>
-                                        <span t-field="line.analytic_account_id" />
-                                    </td>
-                                    <td>
-                                        <span t-field="line.tax_ids" />
-                                    </td>
+<!--                                    <td>-->
+<!--                                        <span t-field="line.date_maturity" />-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-field="line.analytic_account_id" />-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-field="line.tax_ids" />-->
+<!--                                    </td>-->
                                     <td>
                                         <span t-field="line.debit" />
                                     </td>
@@ -85,18 +91,24 @@
                                 <t t-set="total1" t-value="total1 + line.credit"/>
                             </t>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td colspan="3"><strong>Total Line: <span t-esc="sl_no" /></strong></td>
                                 <td><strong>Total:</strong></td>
                                 <td width="10%"><strong>
-                                    <span><t t-esc="total"/></span>
+                                    <span><t t-esc="'%.3f'%total"/></span>
                                 </strong></td>
                                 <td width="10%"><strong>
-                                    <span><t t-esc="total1"/></span>
+                                    <span><t t-esc="'%.3f'%total1"/></span>
                                 </strong></td>
+                            </tr>
+                            <tr style="background: none;">
+                                <td colspan="3" style="background: none;"></td>
+                                <td style="background: none;"><strong>Total Debit in words:</strong></td>
+                                <td colspan="2" style="background: none;"><span t-esc="o.currency_id.with_context(lang='ar_001').amount_to_text(total)"/></td>
+                            </tr>
+                            <tr style="background: none;">
+                                <td colspan="3" style="background: none;"></td>
+                                <td style="background: none;"><strong>Total Credit in words:</strong></td>
+                                <td colspan="2" style="background: none;"><span t-esc="o.currency_id.with_context(lang='ar_001').amount_to_text(total1)"/></td>
                             </tr>
                         </tbody>
                     </table>
