@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_report" model="ir.actions.report">
+        <field name="name">Invoice Report</field>
+        <field name="model">invoice.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">kp_accounting_custom.report_invoice_id</field>
+    </record>
+</odoo>

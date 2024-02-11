@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_report_view">
+            <t t-call="web.external_layout">
+
+                <t t-set="rec" t-value="doc.get_invoice_report_details()"/>
+
+                <div class="page">
+                    <br/>
+                    <div>
+                        <h3 class="text-center mb32">
+                            <strong>Invoice Report</strong>
+                        </h3>
+                    </div>
+                    <br/>
+                    <br/>
+                    <table style="border-collapse: collapse; width: 100%;" class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Invoice No</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Description</th>
+                                <th>Total</th>
+                                <th>Discount Value</th>
+                                <th>Discount Amount</th>
+                                <th>Paid Amount</th>
+                                <th>Balance Amount</th>
+                                <th>Payment Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="consumed_tbody">
+                            <t t-set="sl_no" t-value="0"/>
+                            <t t-foreach="rec" t-as="item">
+                                <tr>
+                                    <td>
+                                        <t t-set="sl_no" t-value="sl_no + 1"/>
+                                        <span t-esc="sl_no" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="item.name" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="item.invoice_date.strftime('%d/%m/%Y')" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="item.partner_id.name" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="item.description" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="'%.3f'%item.amount_total" />
+                                    </td>
+                                    <td>
+                                        <t t-if="item.discount_rate">
+                                            <span t-esc="item.discount_rate" />
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-if="item.total_discount">
+                                            <span t-esc="'%.3f'%item.total_discount" />
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-set="paid_amount" t-value="item.amount_total - item.amount_residual"/>
+                                        <span t-esc="'%.3f'%paid_amount"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="'%.3f'%item.amount_residual" />
+                                    </td>
+                                    <td>
+                                        <t t-esc="doc.get_payment_status_name(item)" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+        <template id="report_invoice_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="kp_accounting_custom.invoice_report_view" />
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
