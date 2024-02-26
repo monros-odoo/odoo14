@@ -8,7 +8,7 @@ class AccountingInvoiceReport(models.TransientModel):
 
     start_date = fields.Date(required=True, string='From Date')
     end_date = fields.Date(required=True, string='End Date')
-    partner_id = fields.Many2one('res.partner', 'Customer', required=True)
+    partner_id = fields.Many2one('res.partner', 'Customer')
 
     def generate_invoice_report(self):
         if self.end_date < self.start_date:
@@ -23,14 +23,17 @@ class AccountingInvoiceReport(models.TransientModel):
 
     @api.model
     def get_invoice_report_details(self):
-        invoice_lines = self.env['account.move'].search([
+        domain = [
             ('invoice_date', '>=', self.start_date),
             ('invoice_date', '<=', self.end_date),
-            ('partner_id', '=', self.partner_id.id),
             ('state', '=', 'posted'),
             ('move_type', 'in', ['out_invoice', 'in_invoice']),
-        ])
+        ]
 
+        if self.partner_id:
+            domain.append(('partner_id', '=', self.partner_id.id))
+
+        invoice_lines = self.env['account.move'].search(domain)
         return invoice_lines
 
     @api.model
