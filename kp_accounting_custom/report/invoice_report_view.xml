@@ -33,6 +33,7 @@
                         </thead>
                         <tbody class="consumed_tbody">
                             <t t-set="sl_no" t-value="0"/>
+                            <t t-set="total_amount" t-value="0"/>
                             <t t-foreach="rec" t-as="item">
                                 <tr>
                                     <td>
@@ -53,6 +54,7 @@
                                     </td>
                                     <td>
                                         <span t-esc="'%.3f'%item.amount_total" />
+                                        <t t-set="total_amount" t-value="total_amount + item.amount_total"/>
                                     </td>
                                     <td>
                                         <t t-if="item.discount_rate">
@@ -76,6 +78,10 @@
                                     </td>
                                 </tr>
                             </t>
+                            <tr>
+                                <td colspan="5" style="text-align: right;"><strong>Grand Total: </strong></td>
+                                <td colspan="6"><strong><span t-esc="'%.3f'%total_amount" /></strong></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
