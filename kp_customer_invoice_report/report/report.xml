@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_customer_inv_report" model="report.paperformat">
+            <field name="name">Customer Invoice Paperformat</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="dpi">90</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">6</field>
+            <field name="margin_right">6</field>
+            <field name="header_spacing">30</field>
+        </record>
+
+
+<!--        <record id="customer_inv_total_report_tmp" model="ir.actions.report">-->
+<!--            <field name="name">Total Customer Invoice Report</field>-->
+<!--            <field name="model">totalcustomer.inv.report.wiz</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">kp_customer_invoice_report.customer_inv_total_report</field>-->
+<!--            <field name="report_file">kp_customer_invoice_report.customer_inv_total_report</field>-->
+<!--            <field name="print_report_name"/>-->
+<!--            <field name="binding_model_id" ref="account.model_account_move"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--             <field name="paperformat_id" ref="kp_customer_invoice_report.paperformat_customer_inv_report"/>-->
+<!--        </record>-->
+
+         <report
+            id="totalcustomer_inv_total_report_tmp"
+            string="Total Customer Invoice Report"
+            model="totalcustomer.inv.report.wiz"
+            report_type="qweb-pdf"
+            file="Total Customer Invoice Report"
+            name="kp_customer_invoice_report.totalcustomer_inv_report"
+            paperformat="paperformat_customer_inv_report"
+        />
+
+
+    </data>
+</odoo>
