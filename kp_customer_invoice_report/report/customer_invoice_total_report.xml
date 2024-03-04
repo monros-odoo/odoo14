@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="customer_inv_toal_report_layout">
+            <!-- Multicompany -->
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <t t-call="kp_customer_invoice_report.external_layout_header_total_invoice"/>
+            <t t-raw="0"/>
+            <!--            <t t-call="kp_customer_invoice_report.external_layout_footer_checklist"/>-->
+        </template>
+
+        <template id="external_layout_header_total_invoice">
+            <div class="header">
+                <table style="width:100%;">
+                    <tr style="width:100%;">
+                        <td style="width:40%;padding-left:5px;">
+                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width:40%;" alt="Logo"/>
+                        </td>
+                        <td style="width:60%;text-align:center;font-size:26px;">
+                            <b>Total Customer Invoice Report</b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+        <template id="totalcustomer_inv_total_report_doc">
+            <t t-call="kp_customer_invoice_report.customer_inv_toal_report_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.user_id.partner_id.lang})"/>
+                <br/>
+                <div class="page" >
+                    <div style="margin-left:50px;">
+                        <table class="table table-borderless" style="width:60%;">
+                            <tr style="width:60%;font-size:18px;" class="table table-borderless">
+                                <td style="text-align:left;font-size:18px;width:30%;">
+                                    <b>From: </b> <span style="padding-left:10px;" t-esc="o.from_date.strftime('%d/%m/%Y')"/>
+                                </td>
+                                <td style="text-align:center;font-size:18px;width:30%;padding-left:80px;">
+                                    <b>To: </b> <span style="padding-left:10px;" t-esc="o.to_date.strftime('%d/%m/%Y')"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <t t-if="o.payment_state">
+                                <tr style="width:50%;font-size:16px;" class="table table-borderless">
+                                <td style="text-align:left;padding-top: 15px;">
+                                    <b>Payment Status: </b>
+                                    <t t-if="o.payment_state == 'not_paid'">
+                                        <span style="padding-left:10px;">Not Paid</span>
+                                    </t>
+                                    <t t-if="o.payment_state == 'in_payment'">
+                                        <span style="padding-left:10px;">In Payment</span>
+                                    </t>
+                                    <t t-if="o.payment_state == 'paid'">
+                                        <span style="padding-left:10px;">Paid</span>
+                                    </t>
+                                </td>
+                            </tr>
+                            </t>
+
+                        </table>
+                    </div>
+                    <div style="margin-top:40px;">
+                        <table style="border-collapse:collapse;width:100%;page-break-inside:auto;border:1px solid black;">
+                            <thead>
+                                <tr style="border-collapse:collapse;width:100%;page-break-after:auto;page-break-inside:avoid;">
+                                    <th style="text-align:center;border:1px solid black;padding:4px;">
+                                        <b>Sl.No.</b>
+                                    </th>
+                                    <th style="text-align:center;border:1px solid black;padding:4px;">
+                                        <b>Customer</b>
+                                    </th>
+                                    <th style="text-align:center;border:1px solid black;padding:4px;">
+                                        <b>Total Invoice</b>
+                                    </th>
+                                    <th style="text-align:center;border:1px solid black;padding:4px;">
+                                        <b>Total Amount</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <t t-set="sl" t-value="0"/>
+                            <t t-set="total_amount" t-value="0"/>
+                            <t t-set="total_count" t-value="0"/>
+                            <tr t-foreach="invoice_lists" t-as="invoice_list" style="page-break-after:auto;page-break-inside:avoid;">
+                                <t t-set="sl" t-value="sl+1"/>
+                                <td style="text-align:center;border:solid 1px;padding:4px;">
+                                    <span t-esc="sl"/>
+                                </td>
+                                <td style="text-align:left;border:solid 1px;padding:4px;">
+                                    <span t-esc="invoice_list['Partner']"/>
+                                </td>
+                                <td style="text-align:center;border:solid 1px;padding:4px;">
+                                    <span t-esc="invoice_list['Inv Count']"/>
+                                     <t t-set="total_count" t-value="total_count+invoice_list['Inv Count']"/>
+                                </td>
+                                <td style="text-align:right;border:solid 1px;padding:4px;">
+                                    <span t-esc="'{:,.3f}'.format(invoice_list['Amount'])"/>
+                                    <t t-set="total_amount" t-value="total_amount+invoice_list['Amount']"/>
+                                </td>
+
+                            </tr>
+                            <tr  style="page-break-after:auto;page-break-inside:avoid;">
+                                <td/>
+                                <td/>
+                                 <td style="text-align:center;border:solid 1px;padding:4px;">
+                                    <b><span t-esc="total_count"/></b>
+                                </td>
+                                <td style="text-align:right;border:solid 1px;padding:4px;">
+                                    <b><span t-esc="'{:,.3f}'.format(total_amount)"/></b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+        <!--        <template id="totalcustomer_inv_total_report">-->
+        <!--            <t t-call="web.basic_layout">-->
+        <!--                <t t-call="web.html_container">-->
+        <!--                    &lt;!&ndash;                             <t t-foreach="docs" t-as="o">&ndash;&gt;-->
+        <!--                    <div class="page" style="border:3px solid black;">-->
+        <!--                        <span><b>Total Customer Invoice Report</b></span>-->
+        <!--                        <span t-esc="docs"/>-->
+        <!--                    </div>-->
+        <!--                </t>-->
+        <!--                <span>dfgdddddddddddddddddddddddf</span>-->
+        <!--            </t>-->
+
+        <!--            &lt;!&ndash;                    </t>&ndash;&gt;-->
+        <!--        </template>-->
+
+        <template id="totalcustomer_inv_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="kp_customer_invoice_report.totalcustomer_inv_total_report_doc"  t-lang="o.user_id.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
