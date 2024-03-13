@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_stock_production_lot_print_new_label">
+            <div class="oe_title" style="width: 100%;">
+                <table cellpadding="0" cellspacing="0" style="font-family:'Times New Roman' !important;font-size:3px; width: 100%; margin-top:2px;">
+
+                    <tr>
+                        <td colspan="2" style="font-size: 5px; padding-top: 3px; font-weight: 600;">
+                            <span t-field="doc.company_id.product_label_name"/>
+                        </td>
+                        <td rowspan="2">
+                            <img style="width:30px;"
+                                 t-att-src="image_data_uri(doc.product_id.qr_code)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="" style="font-size: 6px; font-weight: 600;">
+                            <span>P<span t-field="doc.product_id.power"/>&amp;nbsp;&amp;nbsp;
+                            </span>
+                        </td>
+                        <td style="font-weight: 600; ">
+                            <span style="float: right;" t-field="doc.product_id.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>DIA &amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-esc="doc.product_id.dia"/>&amp;nbsp;&amp;nbsp;
+                            </span>
+                        </td>
+                        <td>
+                            <span>EXP<span t-esc="doc.expiration_date.strftime('%d/%m/%Y')"/>&amp;nbsp;&amp;nbsp;
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>BC &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                <span t-field="doc.product_id.bc"/>
+                            </span>
+                        </td>
+                        <td>
+                            <span>LOT
+                                <span t-field="doc.name"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center;position:relative;">
+                            <span t-field="doc.product_id.barcode"
+                                  t-options="{'widget': 'barcode','img_style': 'width:100%; height:10px;'}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: center;">
+                            <strong>
+                                <span t-esc="doc.product_id.barcode"/>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="report_stock_production_label">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="kp_label_print.report_stock_production_lot_print_new_label"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+
+
+

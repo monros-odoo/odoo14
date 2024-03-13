@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_production_lot_inherit_label_button" model="ir.ui.view">
+            <field name="name">stock.production.lot.inherit.label.button</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="print_new_label_report"
+                                string="Print New Label" type="object"
+                                class="oe_highlight"/>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
