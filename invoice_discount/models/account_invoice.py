@@ -143,26 +143,14 @@ class AccountInvoice(models.Model):
     amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_compute_amount',
                                       track_visibility='always')
 
-    @api.onchange('discount_type', 'discount_rate', 'invoice_line_ids')
+    @api.onchange('discount_type', 'discount_rate','invoice_line_ids')
     def supply_rate(self):
         for inv in self:
             if inv.discount_type == 'percent':
-                for line in inv.line_ids:
-                    line.discount = inv.discount_rate
-                    line._onchange_price_subtotal()
+                inv.total_discount = (inv.total_before_discount * inv.discount_rate) / 100
             else:
-                total = discount = 0.0
-                for line in inv.invoice_line_ids:
-                    total += (line.quantity * line.price_unit)
-                if inv.discount_rate != 0:
-                    discount = (inv.discount_rate / total) * 100
-                else:
-                    discount = inv.discount_rate
-                for line in inv.line_ids:
-                    line.discount = discount
-                    line._onchange_price_subtotal()
+                inv.total_discount = inv.discount_rate
 
-            inv._compute_invoice_taxes_by_group()
     #
 
     def button_dummy(self):

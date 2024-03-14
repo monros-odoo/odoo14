@@ -25,5 +25,6 @@ class AccountMove(models.Model):
         for invoice in self:
             tot_qty = 0
             for line in invoice.invoice_line_ids:
-                tot_qty += line.quantity
+                if line.product_id.type != 'service':
+                    tot_qty += line.quantity
             invoice.tot_qty = tot_qty
