@@ -208,3 +208,10 @@ class StockReturnInvoicePicking(models.TransientModel):
         picking = self.env['stock.picking'].browse(new_picking)
         picking.write({'is_return': True})
         return new_picking, pick_type_id
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    lot_id = fields.Many2one('stock.production.lot', string='Lot/Serial Number', help="Lot/Serial number concerned by the ticket", domain="[('product_id', '=', product_id)]")
+
