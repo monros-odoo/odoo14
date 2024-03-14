@@ -48,10 +48,10 @@
                                 <tr>
                                     <th>Reference number</th>
                                     <th>Date</th>
-                                    <th>Due Date</th>
-                                    <th>Description</th>
-                                    <th class="amount">Original</th>
-                                    <th class="amount">Open Amount</th>
+<!--                                    <th>Due Date</th>-->
+                                    <th colspan="3">Description</th>
+                                    <th class="amount">Debit/Credit</th>
+<!--                                    <th class="amount">Open Amount</th>-->
                                     <th class="amount">Balance</th>
                                 </tr>
                             </thead>
@@ -67,10 +67,10 @@
                                     <td>
                                         <span t-esc="line['date']" />
                                     </td>
-                                    <td>
-                                        <span t-esc="line['date_maturity']" />
-                                    </td>
-                                    <td>
+<!--                                    <td>-->
+<!--                                        <span t-esc="line['date_maturity']" />-->
+<!--                                    </td>-->
+                                    <td colspan="3">
                                         <t t-if="line['name'] != '/'">
                                             <t t-if="not line['ref']">
                                                 <span t-esc="line['name']" />
@@ -101,12 +101,12 @@
                                             t-options="{'widget': 'monetary', 'display_currency': display_currency}"
                                         />
                                     </td>
-                                    <td class="amount">
-                                        <span
-                                            t-esc="line['open_amount']"
-                                            t-options="{'widget': 'monetary', 'display_currency': display_currency}"
-                                        />
-                                    </td>
+<!--                                    <td class="amount">-->
+<!--                                        <span-->
+<!--                                            t-esc="line['open_amount']"-->
+<!--                                            t-options="{'widget': 'monetary', 'display_currency': display_currency}"-->
+<!--                                        />-->
+<!--                                    </td>-->
                                     <td class="amount">
                                         <span
                                             t-esc="line['balance']"

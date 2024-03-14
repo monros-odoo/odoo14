@@ -33,7 +33,7 @@
 
 """,
     'depends': ['sale',
-                'account', 'delivery'
+                'account', 'delivery','account_discount_amount'
                 ],
     'data': [
         'views/sale_view.xml',
