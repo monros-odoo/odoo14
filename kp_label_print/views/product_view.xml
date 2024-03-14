@@ -11,6 +11,7 @@
                     <field name="dia"/>
                     <field name="bc"/>
                     <field name="qr_code" widget="image" invisible="1"/>
+
                 </xpath>
             </field>
         </record>
