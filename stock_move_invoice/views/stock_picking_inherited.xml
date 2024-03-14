@@ -32,6 +32,9 @@
                     <!--                            string="Create Vendor Credit" type="object"-->
                     <!--                            attrs="{'invisible': ['|','|','|',('invoice_count','!=', 0),('state','!=','done'),('operation_code','=','incoming'),('is_return','=',False)]}"/>-->
                 </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']//tree/field[@name='product_id']" position="after">
+                    <field name="lot_id" />
+                </xpath>
             </field>
         </record>
         <record id="stock_picking_type_form_view_inherited" model="ir.ui.view">
