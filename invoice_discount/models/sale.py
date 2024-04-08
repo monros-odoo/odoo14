@@ -65,18 +65,9 @@ class SaleOrder(models.Model):
 
         for order in self:
             if order.discount_type == 'percent':
-                for line in order.order_line:
-                    line.discount = order.discount_rate
+                order.amount_discount = (order.amount_untaxed * order.discount_rate) / 100
             else:
-                total = discount = 0.0
-                for line in order.order_line:
-                    total += round((line.product_uom_qty * line.price_unit))
-                if order.discount_rate != 0:
-                    discount = (order.discount_rate / total) * 100
-                else:
-                    discount = order.discount_rate
-                for line in order.order_line:
-                    line.discount = discount
+                order.amount_discount = order.discount_rate
 
     def _prepare_invoice(self, ):
         invoice_vals = super(SaleOrder, self)._prepare_invoice()

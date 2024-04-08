@@ -17,7 +17,8 @@ class AccountMove(models.Model):
         for invoice in self:
             list_of_product=[]
             for line in invoice.invoice_line_ids:
-                list_of_product.append(line.product_id)
+                if line.product_id.type != 'service':
+                    list_of_product.append(line.product_id)
             invoice.tot_products = len(set(list_of_product))
     
     @api.depends('invoice_line_ids.quantity')
