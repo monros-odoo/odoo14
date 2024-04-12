@@ -27,22 +27,25 @@ import odoo.addons.decimal_precision as dp
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.depends('order_line.price_total')
+    @api.depends('order_line.price_total','discount_rate')
     def _amount_all(self):
         """
         Compute the total amounts of the SO.
         """
         for order in self:
-            amount_untaxed = amount_tax = amount_discount = 0.0
+            amount_untaxed = amount_tax = 0.0
             for line in order.order_line:
                 amount_untaxed += line.price_subtotal
                 amount_tax += line.price_tax
-                amount_discount += (line.product_uom_qty * line.price_unit * line.discount) / 100
-            order.update({
+                if order.discount_type == 'percent':
+                    amount_discount = (amount_untaxed * order.discount_rate) / 100
+                else:
+                    amount_discount = order.discount_rate
+                order.update({
                 'amount_untaxed': amount_untaxed,
                 'amount_tax': amount_tax,
                 'amount_discount': amount_discount,
-                'amount_total': amount_untaxed + amount_tax,
+                'amount_total': amount_untaxed + amount_tax + amount_discount,
             })
 
     discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount type',
@@ -66,8 +69,10 @@ class SaleOrder(models.Model):
         for order in self:
             if order.discount_type == 'percent':
                 order.amount_discount = (order.amount_untaxed * order.discount_rate) / 100
+                order.amount_total = order.amount_untaxed +order.amount_discount
             else:
                 order.amount_discount = order.discount_rate
+                order.amount_total = order.amount_untaxed +order.amount_discount
 
     def _prepare_invoice(self, ):
         invoice_vals = super(SaleOrder, self)._prepare_invoice()
