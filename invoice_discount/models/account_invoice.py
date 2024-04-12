@@ -96,12 +96,13 @@ class AccountInvoice(models.Model):
             else:
                 sign = -1
             if move.discount_type == 'percent':
-                move.amount_discount = sum((line.quantity * line.price_unit * line.discount) / 100 for line in move.invoice_line_ids)
+                move.amount_discount = (move.total_before_discount * move.discount_rate) / 100
             else:
                 move.amount_discount = move.discount_rate
             move.amount_untaxed = sign * (total_untaxed_currency if len(currencies) == 1 else total_untaxed)
             move.amount_tax = sign * (total_tax_currency if len(currencies) == 1 else total_tax)
             move.amount_total = sign * (total_currency if len(currencies) == 1 else total)
+            move.amount_total = move.amount_total + move.amount_discount
             move.amount_residual = -sign * (total_residual_currency if len(currencies) == 1 else total_residual)
             move.amount_untaxed_signed = -total_untaxed
             move.amount_tax_signed = -total_tax
@@ -148,10 +149,10 @@ class AccountInvoice(models.Model):
         for inv in self:
             if inv.discount_type == 'percent':
                 inv.total_discount = (inv.total_before_discount * inv.discount_rate) / 100
+                inv.amount_total = inv.total_before_discount +inv.total_discount
             else:
                 inv.total_discount = inv.discount_rate
-
-    #
+                inv.amount_total = inv.total_before_discount +inv.total_discount
 
     def button_dummy(self):
         self.supply_rate()
