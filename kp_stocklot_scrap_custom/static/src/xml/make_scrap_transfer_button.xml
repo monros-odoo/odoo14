@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-extend="ListView.buttons" t-name="LotMakeTransferButton.buttons">
+        <t t-jquery="button.o_list_button_add" t-operation="after">
+            <button type="button" class="btn btn-primary maketransfer_action">
+                Make Scrap Transfer
+            </button>
+        </t>
+    </t>
+</templates>
