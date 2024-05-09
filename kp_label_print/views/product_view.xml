@@ -13,6 +13,9 @@
                     <field name="qr_code" widget="image" invisible="1"/>
 
                 </xpath>
+                <xpath expr="//field[@name='type']" position="before">
+                    <field name="product_name_label"/>
+                </xpath>
             </field>
         </record>
     </data>
