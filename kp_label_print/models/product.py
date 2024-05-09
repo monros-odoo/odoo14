@@ -17,6 +17,7 @@ class ProductTemplateInherit(models.Model):
     dia = fields.Float(string="Dia")
     bc = fields.Float(string="Bc")
     qr_code = fields.Binary("QR Code", compute='_generate_qr_code')
+    product_name_label = fields.Char(string='Product name (Label)', compute='_compute_product_name_label', store=True, readonly=False)
 
     def _generate_qr_code(self):
         for rec in self:
@@ -37,3 +38,12 @@ class ProductTemplateInherit(models.Model):
                 img.save(temp, format="PNG")
                 qr_image = base64.b64encode(temp.getvalue())
                 rec.qr_code = qr_image
+
+    @api.depends('name')
+    def _compute_product_name_label(self):
+        for product in self:
+            if product.name:
+                product.product_name_label = product.name[:10]
+            else:
+                product.product_name_label = False
+
