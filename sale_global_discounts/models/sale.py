@@ -11,6 +11,14 @@ class SaleOrder(models.Model):
         "Discount Type", readonly=True, states={'draft': [('readonly', False)]}, default='fixed')
     acs_discount_amount = fields.Float("Discount Amount", readonly=True, states={'draft': [('readonly', False)]},)
     discount_percentage = fields.Float("Discount Percentage", readonly=True, states={'draft': [('readonly', False)]},)
+    total_discount_amount = fields.Float("Discount Amount", store=True)
+    amount_untaxed_dis = fields.Monetary(string='Untaxed Amount', store=True, readonly=True, compute='_compute_amount_untaxed_dis',
+                                     track_visibility='always')
+
+    @api.depends('total_discount_amount','amount_untaxed')
+    def _compute_amount_untaxed_dis(self):
+        for rec in self:
+            rec.amount_untaxed_dis = rec.amount_untaxed+rec.total_discount_amount
 
     def _discount_unset(self):
         if self.env.user.company_id.sale_discount_product_id:
@@ -31,10 +39,12 @@ class SaleOrder(models.Model):
             total = 0.0
             if order.discount_types == 'fixed':
                 amount = order.acs_discount_amount
+                self.total_discount_amount = order.acs_discount_amount
             if order.discount_types == 'percentage':
                 for line in order.order_line:
                     total += line.price_subtotal
                 amount = (total * order.discount_percentage)/100
+                self.total_discount_amount = amount
 
             # Create the Sale line
             Line.create({
@@ -48,3 +58,11 @@ class SaleOrder(models.Model):
                 'sequence': 100,
             })
         return True
+
+    def _prepare_invoice(self, ):
+        invoice_vals = super(SaleOrder, self)._prepare_invoice()
+        invoice_vals.update({
+            'total_discount_amount': self.total_discount_amount,
+            'amount_untaxed_dis': self.amount_untaxed_dis,
+        })
+        return invoice_vals

@@ -18,6 +18,8 @@
     'depends': ['sale','account'],
     'data': [
         'views/sale_view.xml',
+        'views/account_invoice.xml',
+        'views/sale_order_report.xml',
         'views/res_config_view.xml',
     ],
     'images': [
