@@ -140,7 +140,7 @@ class AccountInvoice(models.Model):
                                      readonly=True, states={'draft': [('readonly', False)]}, default='percent')
     discount_rate = fields.Float('Discount Amount', digits=(16, 2), readonly=True,
                                  states={'draft': [('readonly', False)]})
-    amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_compute_amount',
+    amount_discount = fields.Monetary(string='Discount', store=True,
                                       track_visibility='always')
 
     @api.onchange('discount_type', 'discount_rate', 'invoice_line_ids')
