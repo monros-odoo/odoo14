@@ -57,7 +57,7 @@
                             <span>DIA &amp;nbsp;<span t-esc="doc.product_id.dia"/></span>
                         </td>
                         <td>
-                            <span>EXP <span t-esc="doc.expiration_date.strftime('%d/%m/%Y')"/></span>
+                            <span>EXP <t t-if="doc.expiration_date"><span t-esc="doc.expiration_date.strftime('%d/%m/%Y')"/></t></span>
                         </td>
                     </tr>
                     <tr>
