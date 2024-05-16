@@ -144,15 +144,15 @@ class AccountInvoice(models.Model):
     amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_compute_amount',
                                       track_visibility='always')
 
-    @api.onchange('discount_type', 'discount_rate','invoice_line_ids')
-    def supply_rate(self):
-        for inv in self:
-            if inv.discount_type == 'percent':
-                inv.total_discount = (inv.total_before_discount * inv.discount_rate) / 100
-                inv.amount_total = inv.total_before_discount +inv.total_discount
-            else:
-                inv.total_discount = inv.discount_rate
-                inv.amount_total = inv.total_before_discount +inv.total_discount
+    # @api.onchange('discount_type', 'discount_rate','invoice_line_ids')
+    # def supply_rate(self):
+    #     for inv in self:
+    #         if inv.discount_type == 'percent':
+    #             inv.total_discount = (inv.total_before_discount * inv.discount_rate) / 100
+    #             inv.amount_total = inv.total_before_discount +inv.total_discount
+    #         else:
+    #             inv.total_discount = inv.discount_rate
+    #             inv.amount_total = inv.total_before_discount +inv.total_discount
 
     def button_dummy(self):
         self.supply_rate()
