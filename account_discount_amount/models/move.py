@@ -41,13 +41,15 @@ class AccountMove(models.Model):
             rec.amount_text = rec.currency_id.amount_to_text(rec.amount_total_signed)
 
 
-    @api.depends('invoice_line_ids','invoice_line_ids.total_discount')
+    @api.depends('invoice_line_ids')
     def get_tot_discount_amount(self):
         for rec in self:
             tot = 0.0
             for line in rec.invoice_line_ids:
-                tot += line.total_discount
+                if line.price_unit < 0:
+                    tot += -(line.quantity *line.price_unit)
             rec.total_discount = tot
+            print("rec.total_discount",rec.total_discount)
 
 
     @api.depends('invoice_line_ids','invoice_line_ids.quantity')
