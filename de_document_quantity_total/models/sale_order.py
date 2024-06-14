@@ -24,6 +24,6 @@ class SaleOrder(models.Model):
     def _compute_sum_quantity(self):
         for order in self:
             tot_qty = 0
-            for line in order.order_line:
+            for line in order.order_line.filtered(lambda s: s.product_id.type != 'service'):
                 tot_qty += line.product_uom_qty
             order.tot_qty = tot_qty
