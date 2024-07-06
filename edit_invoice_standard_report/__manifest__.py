@@ -5,7 +5,7 @@
 {
     'name': 'edit invoice standard report',
     'author': "Marwa Ahmed",
-    'depends': ['base','account','sale_stock' ,'account_discount_amount','sale_global_discounts'],
+    'depends': ['base','account','sale_stock' ,'account_discount_amount'],
     'data': [
              'views/templates.xml',
 
