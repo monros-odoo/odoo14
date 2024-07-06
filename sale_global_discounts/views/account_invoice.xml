@@ -2,38 +2,21 @@
 <odoo>
     <data>
 
-<!--        <record id="discount_account_invoice_view_form_inherit" model="ir.ui.view">-->
-<!--            <field name="name">discount.account.invoice</field>-->
-<!--            <field name="model">account.move</field>-->
-<!--            <field name="inherit_id" ref="account.view_move_form"/>-->
-<!--            <field name="arch" type="xml">-->
+        <record id="discount_account_invoice_view_form_inherit" model="ir.ui.view">
+            <field name="name">discount.account.invoice</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
 
-<!--                <xpath expr="//field[@name='amount_untaxed']" position="replace">-->
-<!--                    <field name="amount_untaxed_dis" readonly="1" />-->
-<!--                    <field name="amount_discount"/>-->
+                <xpath expr="//field[@name='amount_untaxed']" position="replace">
+                    <field name="amount_untaxed_dis" readonly="1" invisible="1"/>
+                    <field name="total_discount_amount" readonly="1" invisible="1"/>
+                    <field name="amount_untaxed" invisible="1"/>
 
-<!--&lt;!&ndash;                    <field name="total_discount_amount" readonly="1" invisible="1"/>&ndash;&gt;-->
-<!--                    <field name="amount_untaxed" invisible="1"/>-->
+                </xpath>
 
-<!--                </xpath>-->
-
-<!--            </field>-->
-<!--        </record>-->
-        <!--        <template id="report_invoice_customized" inherit_id="account.report_invoice_document">-->
-<!--        <template id="report_invoice_customized" inherit_id="edit_invoice_standard_report.report_invoice_document_inherit_new">-->
-
-<!--            <xpath expr="//span[@t-field='line.discount']" position="replace">-->
-<!--                 <span t-esc="'%.2f'%(line.discount)"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//tr[hasclass('border-black')]" position="after">-->
-<!--                <tr>-->
-<!--                    <td>Discountzz</td>-->
-<!--                    <td class="text-right">-->
-<!--                        <span t-field="o.total_discount_amount"/>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--            </xpath>-->
-<!--        </template>-->
+            </field>
+        </record>
 
     </data>
 </odoo>
