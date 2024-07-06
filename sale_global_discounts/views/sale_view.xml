@@ -2,7 +2,7 @@
 <odoo>
 
   <!-- Sale View -->
-    <record id="view_order_form_inherit" model="ir.ui.view">
+    <record id="view_order_form" model="ir.ui.view">
         <field name="name">sale.order.form.rounding</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
@@ -19,28 +19,6 @@
                         <button name="create_discount" string="Add Line" type="object" class="oe_inline fa fa-arrow-right oe_link" attrs="{'invisible': ['|',('global_discount','=', False), ('state','!=', 'draft')]}"/>
                       </div>
                   </div>
-                </xpath>
-                 <xpath expr="//group[@name='note_group']" position="replace">
-                    <group name="note_group" col="6">
-
-                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
-                            <field name="amount_untaxed_dis" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                            <field name="total_discount_amount" widget='monetary'
-                                   options="{'currency_field': 'currency_id'}" readonly="1"/>
-                            <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
-                                <label for="amount_total"/>
-
-                            </div>
-                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator"
-                                   widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                        </group>
-                        <group colspan="4">
-                            <field name="note" nolabel="1" placeholder="Terms and conditions..."/>
-                        </group>
-                        <div class="oe_clear"/>
-                    </group>
-
                 </xpath>
             </data>
         </field>
