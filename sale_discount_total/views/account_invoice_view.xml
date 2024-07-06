@@ -10,9 +10,9 @@
                 <xpath expr="//field[@name='discount']" position="attributes">
                     <attribute name="digits">[16, 2]</attribute>
                 </xpath>
-<!--                <xpath expr="//field[@name='amount_untaxed']" position="after">-->
-<!--                        <field name="amount_discount"/>-->
-<!--                </xpath>-->
+                <xpath expr="//field[@name='amount_untaxed']" position="after">
+                        <field name="amount_discount"/>
+                </xpath>
                 <xpath expr="//field[@name='narration']" position="after">
                     <div>
                         <label for="discount_type" string="Discount Type :"/>

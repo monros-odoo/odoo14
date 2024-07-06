@@ -10,11 +10,18 @@
                 <tr>
                     <td>Total Discount</td>
                     <td class="text-right">
-                        <span t-field="doc.amount_discount"
+                        <span t-field="doc.total_discount_amount"
                               t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                     </td>
                 </tr>
             </xpath>
+             <xpath expr="//span[@t-field='doc.amount_untaxed']" position="replace">
+               <span t-field="doc.amount_untaxed_dis"/>
+                                <span t-field="doc.amount_untaxed_dis" invisible="1"/>
+
+            </xpath>
+
+
         </template>
 
     </data>

@@ -15,7 +15,7 @@
     Discount on Total
     Discount in Sale
     Global Discount in Sale""",
-    'depends': ['sale','account','sale_discount_total','edit_invoice_standard_report'],
+    'depends': ['sale','account'],
     'data': [
         'views/sale_view.xml',
         'views/account_invoice.xml',
