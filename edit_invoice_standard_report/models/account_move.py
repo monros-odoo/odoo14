@@ -18,7 +18,7 @@ class AccountMoveline(models.Model):
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    total_before_discount = fields.Float(compute='compute_total_before_discount', string='Subtotal',store=True)
+    total_before_discount = fields.Float(compute='compute_total_before_discount', string='Subtotal')
 
     @api.depends('invoice_line_ids.price_unit','invoice_line_ids.quantity')
     def compute_total_before_discount(self):
