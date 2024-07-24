@@ -69,9 +69,14 @@ class StockReturnPicking(models.TransientModel):
             elif move.state in ('done'):
                 quantity -= move.product_qty
         quantity = float_round(quantity, precision_rounding=stock_move.product_id.uom_id.rounding)
+        move_line = self.env['stock.move.line'].search([('move_id','=',stock_move.id),('product_id','=',stock_move.product_id.id)])
+        lot = False
+        if move_line.lot_id and len(move_line.lot_id) == 1:
+            lot = move_line.lot_id.id
+
         return {
             'product_id': stock_move.product_id.id,
-            'lot_id': stock_move.lot_id.id,
+            'lot_id': lot,
             'quantity': quantity,
             'move_id': stock_move.id,
             'uom_id': stock_move.product_id.uom_id.id,
