@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+
+        <template id="journal_external_layout_background">
+            <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
+                <div class="o_background_header">
+                    <div clas="row">
+                        <!--                     <div class="oe_inline">-->
+                        <!--	                    <img t-if="company.logo"  t-att-src="'data:image/png;base64,%s' %to_text(company.logo)" style="max-height:900px;max-width:1000px"/>-->
+                        <!--	       	         <br/>-->
+                        <!--                    </div>-->
+                    </div>
+
+                    <div class="clearfix mb8"/>
+                </div>
+            </div>
+
+            <div t-attf-class="o_company_#{company.id}_layout article o_report_layout_background"
+                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
+                <div class="text-center">
+                    <ul class="list-inline">
+                        <li t-if="company.phone" class="list-inline-item">
+                            <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>
+                            <span t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email" class="list-inline-item">
+                            <i class="fa fa-at" role="img" aria-label="Email" title="Email"/>
+                            <span t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item">
+                            <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>
+                            <span t-field="company.website"/>
+                        </li>
+                        <li t-if="company.vat" class="list-inline-item">
+                            <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-field="company.vat"/>
+                        </li>
+                    </ul>
+                    <div t-field="company.report_footer"/>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="journal_external_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+            <t t-call="kp_print_journal_entries.journal_external_layout_background">
+                <t t-raw="0"/>
+            </t>
+
+        </template>
+
+
+
+        <template id="journal_entry_report_view">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="page">
+                    <div class="row col-5">
+                    </div>
+                    <div>
+                        <h3 class="text-center">
+                            <strong>Journal Voucher</strong>
+                        </h3>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <strong>Number :</strong>
+                                <span t-field="o.name"/>
+                            </div>
+                            <div>
+                                <strong>Journal :</strong>
+                                <span t-field="o.journal_id"/>
+                            </div>
+                            <div class="text-left">
+                                <strong>Created By :</strong>
+                                <span t-field="o.user_id"/>
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+                            <div class="text-left">
+                                <strong>Date :</strong>
+                                <span t-field="o.date"/>
+                            </div>
+                            <div class="text-left">
+                                <strong>Reference :</strong>
+                                <span t-field="o.ref"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br/>
+                    <table style="width: 100%;border-top: 1px solid black;border-bottom: 1px solid black;" class="table table-sm">
+<!--                    <table style="width: 100%;" class="table table-sm">-->
+                        <thead style="padding:1rem !important;">
+                            <tr>
+
+                                <th style="color:#7fa4af;border-top: 1px solid black;border-bottom: 1px solid black;" width="20%">Account</th>
+                                <th style="color:#7fa4af;" width="20%">Partner</th>
+                                <th style="color:#7fa4af;" width="20%">Label</th>
+                                <th style="color:#7fa4af;" width="10%">Analytic Account</th>
+                                <th style="color:#7fa4af;" width="10%">Amount in Currency</th>
+                                <th style="color:#7fa4af;" width="10%">Debit</th>
+                                <th style="color:#7fa4af;" width="10%">Credit</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <t t-set="total" t-value="0.0"/>
+                            <t t-set="total1" t-value="0.0"/>
+                            <t t-set="total_amount_currency" t-value="0.0"/>
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+
+                                    <td>
+                                        <span t-field="line.account_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.partner_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.analytic_account_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.amount_currency"
+                                              t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.debit"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.credit"/>
+                                    </td>
+                                </tr>
+                                <t t-set="total" t-value="total + line.debit"/>
+                                <t t-set="total1" t-value="total1 + line.credit"/>
+                                <t t-set="total_amount_currency"
+                                   t-value="total_amount_currency + line.amount_currency"/>
+                            </t>
+                            <tr style="border-top: 1px solid black !important;">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <strong>Total:</strong>
+                                </td>
+                                <td width="10%">
+                                    <strong>
+                                        <span>
+                                            <t t-esc="total_amount_currency"
+                                               t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </span>
+                                    </strong>
+                                </td>
+                                <td width="10%">
+                                    <strong>
+                                        <span>
+                                            <t t-esc="total"
+                                               t-options="{'widget': 'monetary', 'display_currency': o.company_currency_id}"/>
+                                        </span>
+                                    </strong>
+                                </td>
+                                <td width="10%">
+                                    <strong>
+                                        <span>
+                                            <t t-esc="total1"
+                                               t-options="{'widget': 'monetary', 'display_currency': o.company_currency_id}"/>
+                                        </span>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div class="row mt32 mb32">
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong style="padding-left:20px;font-size:17px;">Received By:</strong>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong style="padding-left:80px;font-size:17px;">Signatures:</strong>
+                        </div>
+                    </div>
+
+
+                    <!--
+                                        <div name="footer_section" style="margin-top:100px;">
+                                          <table>
+                                            <tr>
+                                                <th style="text-align: left; width: 300px; max-width:300px;">Created By</th>
+                                                <th style="text-align: center; width: 500px; max-width:500px;">Validated By</th>
+                                                <th style="text-align: center; width: 500px; max-width:500px;">Approved By</th>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left; width: 300px; max-width:300px;">
+                                                </td>
+                                                <td style="text-align: center; width: 500px; max-width:500px;">
+
+                                                </td>
+                                                <td style="text-align: center; width: 500px; max-width:500px;">
+
+                                                </td>
+
+                                            </tr>
+                                         </table>
+                                        </div>-->
+
+
+                </div>
+            </t>
+        </template>
+
+        <template id="journal_entry_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="kp_print_journal_entries.journal_entry_report_view" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
