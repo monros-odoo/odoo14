@@ -6,13 +6,13 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='discount']" position="after">
-                <field name="discount_amount" invisible="1"/>
-                <field name="total_discount" invisible="1"/>
+                <field name="discount_amount" invisible="1" force_save="1"/>
+                <field name="total_discount" invisible="1" force_save="1"/>
 <!--                <field name="price_after_disc"/>-->
             </xpath>
             <xpath expr="//field[@name='amount_total']" position="before">
-                <field name="total_before_discount"/>
-                <field name="total_discount"/>
+                <field name="total_before_discount" force_save="1"/>
+                <field name="total_discount" force_save="1"/>
 <!--                <field name="total_qty"/>-->
             </xpath>
             <xpath expr="//field[@name='amount_total']" position="after">
