@@ -38,7 +38,9 @@ class AccountInvoice(models.Model):
         'line_ids.amount_residual',
         'line_ids.amount_residual_currency',
         'line_ids.payment_id.state',
-        'line_ids.full_reconcile_id')
+        'line_ids.full_reconcile_id',
+        'discount_rate',
+        'discount_type')
     def _compute_amount(self):
         for move in self:
 
@@ -96,17 +98,22 @@ class AccountInvoice(models.Model):
             else:
                 sign = -1
             if move.discount_type == 'percent':
-                move.amount_discount = (move.total_before_discount * move.discount_rate) / 100
+                amount_discount = (move.total_before_discount * move.discount_rate) / 100
             else:
-                move.amount_discount = move.discount_rate
+                amount_discount = move.discount_rate
+            total_with_discount = total - amount_discount
+
+            move.amount_discount = amount_discount
             move.amount_untaxed = sign * (total_untaxed_currency if len(currencies) == 1 else total_untaxed)
             move.amount_tax = sign * (total_tax_currency if len(currencies) == 1 else total_tax)
             move.amount_total = sign * (total_currency if len(currencies) == 1 else total)
             move.amount_total = move.amount_total + move.amount_discount
-            move.amount_residual = -sign * (total_residual_currency if len(currencies) == 1 else total_residual)
+            # move.amount_residual = -sign * (total_residual_currency if len(currencies) == 1 else total_residual)
+            move.amount_residual = -sign * (total_residual_currency if len(currencies) == 1 else total_residual) + amount_discount
             move.amount_untaxed_signed = -total_untaxed
             move.amount_tax_signed = -total_tax
-            move.amount_total_signed = abs(total) if move.move_type == 'entry' else -total
+            # move.amount_total_signed = abs(total) if move.move_type == 'entry' else -total
+            move.amount_total_signed = abs(total_with_discount) if move.move_type == 'entry' else -total_with_discount
             move.amount_residual_signed = total_residual
 
             currency = len(currencies) == 1 and currencies.pop() or move.company_id.currency_id
@@ -143,6 +150,9 @@ class AccountInvoice(models.Model):
                                  states={'draft': [('readonly', False)]})
     amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_compute_amount',
                                       track_visibility='always')
+
+
+
 
     @api.onchange('discount_type', 'discount_rate','invoice_line_ids')
     def supply_rate(self):
