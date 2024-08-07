@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="Big5" ?>
+<odoo>
+    <template id="main_table_header_partner_ledger">
+        <thead class="o_account_reports_header_hierarchy">
+            <t t-foreach="lines.get('columns_header')" t-as="header_line">
+                <tr>
+                    <t t-foreach="header_line" t-as="cell">
+                        <t t-if="cell.get('name') not in ['JRNL', 'Account', 'Due Date', 'Matching Number', 'Initial Balance','Amount Currency']">
+                            <th t-att-class="'o_account_report_column_header ' + (cell.get('class', ''))"
+                                t-att-colspan="cell.get('colspan')"
+                                t-att-style="cell.get('style', '')"
+                                t-att-title="cell.get('title')"
+                                t-att-data-toggle="cell.get('data-toggle')">
+                                <t t-call="{{cell.get('template', 'account_reports.cell_template')}}"/>
+                            </th>
+                        </t>
+                    </t>
+                </tr>
+            </t>
+        </thead>
+    </template>
+
+</odoo>
